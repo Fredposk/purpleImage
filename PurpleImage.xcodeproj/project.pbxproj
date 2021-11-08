@@ -56,15 +56,31 @@
 		405703B22739477C0095BD5E /* PurpleImage */ = {
 			isa = PBXGroup;
 			children = (
-				405703B32739477C0095BD5E /* AppDelegate.swift */,
-				405703B52739477C0095BD5E /* SceneDelegate.swift */,
+				405703CC273961400095BD5E /* Screens */,
+				405703CB2739612B0095BD5E /* Resources */,
 				405703BC2739477E0095BD5E /* Assets.xcassets */,
 				405703BE2739477E0095BD5E /* LaunchScreen.storyboard */,
 				405703C12739477E0095BD5E /* Info.plist */,
+			);
+			path = PurpleImage;
+			sourceTree = "<group>";
+		};
+		405703CB2739612B0095BD5E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				405703B32739477C0095BD5E /* AppDelegate.swift */,
+				405703B52739477C0095BD5E /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		405703CC273961400095BD5E /* Screens */ = {
+			isa = PBXGroup;
+			children = (
 				405703C727394ABC0095BD5E /* SearchPicturesVC.swift */,
 				405703C927394AD00095BD5E /* FavoritesVC.swift */,
 			);
-			path = PurpleImage;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

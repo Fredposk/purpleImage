@@ -22,23 +22,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 
-//    TODO: create functions to build tabbar and views
 
-    func createSearchViewController() -> UINavigationController {
+    private let createSearchViewController: UINavigationController = {
         let searchVC = SearchPicturesVC()
         searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         return UINavigationController(rootViewController: searchVC)
-    }
+    }()
 
-    func createFavoritesViewController() -> UINavigationController {
+   private let createFavoritesViewController: UINavigationController = {
         let searchVC = FavoritesVC()
         searchVC.tabBarItem = UITabBarItem(title: "Liked", image: UIImage(systemName: "heart"), tag: 1)
         return UINavigationController(rootViewController: searchVC)
-    }
+    }()
 
-    func createTabBar () -> UITabBarController {
+    func createTabBar() -> UITabBarController {
         let tabBar = UITabBarController()
-        tabBar.viewControllers = [createSearchViewController(), createFavoritesViewController()]
+        tabBar.viewControllers = [createSearchViewController, createFavoritesViewController]
+        UITabBar.appearance().tintColor = .systemPurple
+        UITabBar.appearance().backgroundColor = .secondarySystemBackground
         return tabBar
     }
 
