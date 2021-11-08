@@ -16,12 +16,20 @@ class SearchPicturesVC: UIViewController {
         return image
     }()
 
+    let textfield = PiTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(logoImage)
 
         view.backgroundColor = .systemBackground
+
+        configureLogoImageView()
+        configureTextField()
+
+        removeKeyboard()
+
+
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -33,14 +41,44 @@ class SearchPicturesVC: UIViewController {
         super.viewDidAppear(animated)
 
 
+
+    }
+
+    func configureLogoImageView () {
+        view.addSubview(logoImage)
+
         NSLayoutConstraint.activate([
             logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            logoImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            logoImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImage.widthAnchor.constraint(equalToConstant: 290),
             logoImage.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-    
+
+    func configureTextField() {
+        view.addSubview(textfield)
+
+        NSLayoutConstraint.activate([
+            textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textfield.widthAnchor.constraint(equalToConstant: 290),
+            textfield.heightAnchor.constraint(equalToConstant: 45),
+            textfield.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 50)
+        ])
+
+        textfield.delegate = self
+    }
+
+    func removeKeyboard() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(textfield.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+    }
+
+}
 
 
+extension SearchPicturesVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textfield.resignFirstResponder()
+        return true
+    }
 }
