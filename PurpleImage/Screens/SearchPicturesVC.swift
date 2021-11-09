@@ -16,7 +16,18 @@ class SearchPicturesVC: UIViewController {
         return image
     }()
 
-    let textfield = PiTextField()
+    private let privacyLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Privacy Policy"
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.textColor = .secondaryLabel
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+
+    private let textfield = PiTextField()
+    private let callToActionButton = PiButton(buttonTitle: "Search..")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +36,14 @@ class SearchPicturesVC: UIViewController {
 
         configureLogoImageView()
         configureTextField()
+        configureCallToActionButton()
 
         removeKeyboard()
+
+        callToActionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
+
+        configurePrivacyPolicyLabel()
+        privacyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPrivacyLabel)))
 
 
 
@@ -37,18 +54,13 @@ class SearchPicturesVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
 
-
-    }
-
-    func configureLogoImageView () {
+    func configureLogoImageView() {
         view.addSubview(logoImage)
 
         NSLayoutConstraint.activate([
-            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImage.widthAnchor.constraint(equalToConstant: 290),
             logoImage.heightAnchor.constraint(equalToConstant: 100)
@@ -62,7 +74,7 @@ class SearchPicturesVC: UIViewController {
             textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textfield.widthAnchor.constraint(equalToConstant: 290),
             textfield.heightAnchor.constraint(equalToConstant: 45),
-            textfield.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 50)
+            textfield.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40)
         ])
 
         textfield.delegate = self
@@ -71,6 +83,37 @@ class SearchPicturesVC: UIViewController {
     func removeKeyboard() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(textfield.endEditing(_:)))
         view.addGestureRecognizer(tap)
+    }
+
+    func configureCallToActionButton() {
+        view.addSubview(callToActionButton)
+
+        NSLayoutConstraint.activate([
+            callToActionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            callToActionButton.heightAnchor.constraint(equalToConstant: 40),
+            callToActionButton.widthAnchor.constraint(equalToConstant: 200),
+            callToActionButton.topAnchor.constraint(equalTo: textfield.bottomAnchor, constant: 60)
+        ])
+    }
+
+    @objc func didTapActionButton() {
+        let nav = SearchResultsVC()
+        navigationController?.pushViewController(nav, animated: true)
+
+    }
+
+    func configurePrivacyPolicyLabel () {
+        view.addSubview(privacyLabel)
+
+        NSLayoutConstraint.activate([
+            privacyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            privacyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+        ])
+    }
+
+    @objc func didTapPrivacyLabel() {
+        print("hello")
     }
 
 }
@@ -82,3 +125,5 @@ extension SearchPicturesVC: UITextFieldDelegate {
         return true
     }
 }
+
+

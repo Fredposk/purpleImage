@@ -14,6 +14,8 @@
 		405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703C727394ABC0095BD5E /* SearchPicturesVC.swift */; };
 		405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703C927394AD00095BD5E /* FavoritesVC.swift */; };
 		405703D02739B8C50095BD5E /* PiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703CF2739B8C50095BD5E /* PiTextField.swift */; };
+		40895A74273A70C500276AE2 /* PiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A73273A70C500276AE2 /* PiButton.swift */; };
+		40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A75273A82D000276AE2 /* SearchResultsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		405703C727394ABC0095BD5E /* SearchPicturesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPicturesVC.swift; sourceTree = "<group>"; };
 		405703C927394AD00095BD5E /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		405703CF2739B8C50095BD5E /* PiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiTextField.swift; sourceTree = "<group>"; };
+		40895A73273A70C500276AE2 /* PiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiButton.swift; sourceTree = "<group>"; };
+		40895A75273A82D000276AE2 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 			children = (
 				405703C727394ABC0095BD5E /* SearchPicturesVC.swift */,
 				405703C927394AD00095BD5E /* FavoritesVC.swift */,
+				40895A75273A82D000276AE2 /* SearchResultsVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -90,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
+				40895A73273A70C500276AE2 /* PiButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,10 +170,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,
 				405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */,
+				40895A74273A70C500276AE2 /* PiButton.swift in Sources */,
 				405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
