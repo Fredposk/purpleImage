@@ -36,6 +36,7 @@ class SearchPicturesVC: UIViewController {
 
         configureLogoImageView()
         configureTextField()
+        
         configureCallToActionButton()
 
         removeKeyboard()
@@ -56,7 +57,7 @@ class SearchPicturesVC: UIViewController {
 
 
 
-    func configureLogoImageView() {
+     func configureLogoImageView() {
         view.addSubview(logoImage)
 
         NSLayoutConstraint.activate([
@@ -97,7 +98,9 @@ class SearchPicturesVC: UIViewController {
     }
 
     @objc func didTapActionButton() {
-        let nav = SearchResultsVC()
+        guard let searchText = textfield.text, searchText.isEmpty == false else {return}
+
+        let nav = SearchResultsVC(for: searchText)
         navigationController?.pushViewController(nav, animated: true)
 
     }

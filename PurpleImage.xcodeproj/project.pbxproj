@@ -16,6 +16,9 @@
 		405703D02739B8C50095BD5E /* PiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703CF2739B8C50095BD5E /* PiTextField.swift */; };
 		40895A74273A70C500276AE2 /* PiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A73273A70C500276AE2 /* PiButton.swift */; };
 		40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A75273A82D000276AE2 /* SearchResultsVC.swift */; };
+		40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A78273B0DDF00276AE2 /* NetworkManager.swift */; };
+		40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7B273B10A000276AE2 /* PictureResultsModel.swift */; };
+		40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7D273B136800276AE2 /* ErrorMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		405703CF2739B8C50095BD5E /* PiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiTextField.swift; sourceTree = "<group>"; };
 		40895A73273A70C500276AE2 /* PiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiButton.swift; sourceTree = "<group>"; };
 		40895A75273A82D000276AE2 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
+		40895A78273B0DDF00276AE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		40895A7B273B10A000276AE2 /* PictureResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureResultsModel.swift; sourceTree = "<group>"; };
+		40895A7D273B136800276AE2 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 		405703B22739477C0095BD5E /* PurpleImage */ = {
 			isa = PBXGroup;
 			children = (
+				40895A7F273B136E00276AE2 /* Managers */,
+				40895A7A273B108200276AE2 /* Model */,
+				40895A77273B0DB600276AE2 /* Utilities */,
 				405703D12739C1A20095BD5E /* Views */,
 				405703CC273961400095BD5E /* Screens */,
 				405703CB2739612B0095BD5E /* Resources */,
@@ -98,6 +107,30 @@
 				40895A73273A70C500276AE2 /* PiButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		40895A77273B0DB600276AE2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				40895A7D273B136800276AE2 /* ErrorMessage.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		40895A7A273B108200276AE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40895A7B273B10A000276AE2 /* PictureResultsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		40895A7F273B136E00276AE2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				40895A78273B0DDF00276AE2 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,8 +205,11 @@
 			files = (
 				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
+				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
+				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,
+				40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */,
 				405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */,
 				40895A74273A70C500276AE2 /* PiButton.swift in Sources */,
 				405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */,
