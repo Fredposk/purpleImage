@@ -28,7 +28,14 @@ class SearchResultsVC: UIViewController {
         configureNavigationBar()
 
         NetworkManager.shared.getPictures(for: results, page: 1) { results in
-            print(results)
+
+            switch results {
+            case .success(let response):
+                print(response!)
+            case .failure(let errorMessage):
+                print(errorMessage.rawValue)
+            }
+
         }
 
         
