@@ -27,18 +27,19 @@ class SearchResultsVC: UIViewController {
         view.backgroundColor = .systemBackground
         configureNavigationBar()
 
-        NetworkManager.shared.getPictures(for: results, page: 1) { results in
+        NetworkManager.shared.getPictures(for: results, page: 1) { [weak self] results in
 
+            guard let self = self else {return}
             switch results {
             case .success(let response):
                 print(response!)
             case .failure(let errorMessage):
-                print(errorMessage.rawValue)
+                let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
             }
-
         }
 
-        
     }
 
     private func configureNavigationBar() {
@@ -47,7 +48,6 @@ class SearchResultsVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
 
-        
     }
 
 

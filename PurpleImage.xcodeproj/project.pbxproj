@@ -19,6 +19,8 @@
 		40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A78273B0DDF00276AE2 /* NetworkManager.swift */; };
 		40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7B273B10A000276AE2 /* PictureResultsModel.swift */; };
 		40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7D273B136800276AE2 /* ErrorMessage.swift */; };
+		40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */; };
+		40A22966273DD84E002DF56D /* SearchResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22965273DD84E002DF56D /* SearchResultImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		40895A78273B0DDF00276AE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		40895A7B273B10A000276AE2 /* PictureResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureResultsModel.swift; sourceTree = "<group>"; };
 		40895A7D273B136800276AE2 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
+		40A22965273DD84E002DF56D /* SearchResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +75,7 @@
 				40895A7F273B136E00276AE2 /* Managers */,
 				40895A7A273B108200276AE2 /* Model */,
 				40895A77273B0DB600276AE2 /* Utilities */,
-				405703D12739C1A20095BD5E /* Views */,
+				405703D12739C1A20095BD5E /* Custom Views */,
 				405703CC273961400095BD5E /* Screens */,
 				405703CB2739612B0095BD5E /* Resources */,
 				405703BC2739477E0095BD5E /* Assets.xcassets */,
@@ -100,13 +104,15 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		405703D12739C1A20095BD5E /* Views */ = {
+		405703D12739C1A20095BD5E /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				40A22962273DD498002DF56D /* Cells */,
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
 				40895A73273A70C500276AE2 /* PiButton.swift */,
+				40A22965273DD84E002DF56D /* SearchResultImageView.swift */,
 			);
-			path = Views;
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		40895A77273B0DB600276AE2 /* Utilities */ = {
@@ -131,6 +137,14 @@
 				40895A78273B0DDF00276AE2 /* NetworkManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		40A22962273DD498002DF56D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,10 +222,12 @@
 				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
 				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
+				40A22966273DD84E002DF56D /* SearchResultImageView.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,
 				40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */,
 				405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */,
 				40895A74273A70C500276AE2 /* PiButton.swift in Sources */,
+				40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */,
 				405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

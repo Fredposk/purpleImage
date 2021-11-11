@@ -10,8 +10,10 @@ import Foundation
 final class NetworkManager {
 
 
-   static let shared = NetworkManager()
-   private let baseURL = "https://pixabay.com/api/?key=24258005-77fd453beb301eb32e3abf948&q="
+    static let shared = NetworkManager()
+    private let baseURL = "https://pixabay.com/api/?key=24258005-77fd453beb301eb32e3abf948&q="
+
+    private init() {}
 
 }
 
@@ -22,8 +24,6 @@ extension NetworkManager {
     func getPictures(for searchTerm: String, page: Int, completed: @escaping getPicturesResult) {
 
         let endPoint = baseURL + searchTerm.replacingOccurrences(of: " ", with: "+")
-
-//        let string = "https://pixabay.com/api/?key=24258005-77fd453beb301eb32e3abf948&q=yellow+flowers"
         guard let url = URL(string: endPoint) else {
             completed(.failure(.invalidSearchTerm))
             return
@@ -42,22 +42,15 @@ extension NetworkManager {
                 completed(.failure(.invalidData))
                 return
             }
-
             let decoder = JSONDecoder()
             do {
-                 let completedResponse = try decoder.decode(hits.self, from: data)
+                let completedResponse = try decoder.decode(hits.self, from: data)
                 completed(.success(completedResponse))
             } catch {
                 completed(.failure(.errorParsingData))
             }
-
-
-
-
-
             return
         }
-
         task.resume()
 
 

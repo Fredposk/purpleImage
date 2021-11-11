@@ -31,21 +31,15 @@ class SearchPicturesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
 
         configureLogoImageView()
         configureTextField()
-        
         configureCallToActionButton()
-
         removeKeyboard()
-
         callToActionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
-
         configurePrivacyPolicyLabel()
         privacyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPrivacyLabel)))
-
 
 
     }
@@ -54,7 +48,6 @@ class SearchPicturesVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-
 
 
      func configureLogoImageView() {
@@ -98,7 +91,12 @@ class SearchPicturesVC: UIViewController {
     }
 
     @objc func didTapActionButton() {
-        guard let searchText = textfield.text, searchText.isEmpty == false else {return}
+        guard let searchText = textfield.text, searchText.isEmpty == false else {
+            let alert = UIAlertController(title: "ERROR", message: "Please enter a search term to continue", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true)
+            return
+        }
 
         let nav = SearchResultsVC(for: searchText)
         navigationController?.pushViewController(nav, animated: true)

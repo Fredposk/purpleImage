@@ -15,6 +15,7 @@ struct Hit: Identifiable, Codable {
     var id: Int
     var pageURL: String
     var largeImageURL: String
+    var webformatURL: String
     var views: Int
     var user: String
     var tags: String
