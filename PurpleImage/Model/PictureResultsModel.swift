@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct hits: Codable {
+struct hits: Codable, Hashable {
     var hits: [Hit]
 }
 
-struct Hit: Identifiable, Codable {
+struct Hit: Identifiable, Codable, Hashable {
     var id: Int
     var pageURL: String
     var largeImageURL: String

@@ -19,7 +19,7 @@ final class NetworkManager {
 
 extension NetworkManager {
 
-    typealias getPicturesResult = (Result<hits?, errorMessage>) -> Void
+    typealias getPicturesResult = (Result<hits, errorMessage>) -> Void
 
     func getPictures(for searchTerm: String, page: Int, completed: @escaping getPicturesResult) {
 
