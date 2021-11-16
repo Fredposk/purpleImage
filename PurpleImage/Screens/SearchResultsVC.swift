@@ -36,13 +36,13 @@ class SearchResultsVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureNavigationBar()
-        networkCall()
         configureCollectionView()
         configureDataSource()
-
-
+        networkCall()
 
     }
+
+
 
     private func configureNavigationBar() {
         title = results
@@ -53,8 +53,11 @@ class SearchResultsVC: UIViewController {
     }
 
     private func networkCall() {
+        showLoadingView()
         NetworkManager.shared.getPictures(for: results, page: 1) { [weak self] results in
             guard let self = self else {return}
+
+            self.dismissLoadingView()
             switch results {
             case .success(let response):
                 self.hits = response.hits
@@ -73,11 +76,11 @@ class SearchResultsVC: UIViewController {
         let itemPadding: CGFloat = 10
         let minimumItemSpacing: CGFloat = 20
         let availableWidth = screenWidth - (itemPadding * 2) - (minimumItemSpacing * 2)
-        let itemSize = availableWidth/3
+        let itemSize = availableWidth/2
 
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemSize, height: itemSize+30)
-        layout.sectionInset = UIEdgeInsets(top: itemPadding, left: itemPadding, bottom: itemPadding, right: itemPadding)
+        layout.sectionInset = UIEdgeInsets(top: itemPadding, left: itemPadding,  bottom: itemPadding, right: itemPadding)
 
         return layout
     }

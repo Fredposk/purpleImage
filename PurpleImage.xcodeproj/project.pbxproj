@@ -20,7 +20,8 @@
 		40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7B273B10A000276AE2 /* PictureResultsModel.swift */; };
 		40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7D273B136800276AE2 /* ErrorMessage.swift */; };
 		40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */; };
-		40A22966273DD84E002DF56D /* SearchResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22965273DD84E002DF56D /* SearchResultImageView.swift */; };
+		40D8D1682743DFA200FAD588 /* PiSearchResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */; };
+		40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,8 @@
 		40895A7B273B10A000276AE2 /* PictureResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureResultsModel.swift; sourceTree = "<group>"; };
 		40895A7D273B136800276AE2 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
-		40A22965273DD84E002DF56D /* SearchResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultImageView.swift; sourceTree = "<group>"; };
+		40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiSearchResultImageView.swift; sourceTree = "<group>"; };
+		40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		405703B22739477C0095BD5E /* PurpleImage */ = {
 			isa = PBXGroup;
 			children = (
+				40D8D16B2743E75D00FAD588 /* Extensions */,
 				40895A7F273B136E00276AE2 /* Managers */,
 				40895A7A273B108200276AE2 /* Model */,
 				40895A77273B0DB600276AE2 /* Utilities */,
@@ -110,7 +113,7 @@
 				40A22962273DD498002DF56D /* Cells */,
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
 				40895A73273A70C500276AE2 /* PiButton.swift */,
-				40A22965273DD84E002DF56D /* SearchResultImageView.swift */,
+				40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -145,6 +148,14 @@
 				40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		40D8D16B2743E75D00FAD588 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,12 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D8D1682743DFA200FAD588 /* PiSearchResultImageView.swift in Sources */,
+				40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */,
 				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
 				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
 				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
-				40A22966273DD84E002DF56D /* SearchResultImageView.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,
 				40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */,
 				405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */,

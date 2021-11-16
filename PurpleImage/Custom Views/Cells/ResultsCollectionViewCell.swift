@@ -10,7 +10,7 @@ import UIKit
 class ResultsCollectionViewCell: UICollectionViewCell {
 
     static let ReuseID = "ResultsCell"
-    private var image = SearchResultImageView(frame: .zero)
+    private var searchResultImage = PiSearchResultImageView(frame: .zero)
 
 
     private var views: UILabel = {
@@ -22,7 +22,7 @@ class ResultsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let padding: CGFloat = 10
+    let padding: CGFloat = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,23 +34,23 @@ class ResultsCollectionViewCell: UICollectionViewCell {
     }
 
     func setResult(for hit: Hit) {
-        views.text = "\(hit.views)"
-
+        views.text = "Views: \(hit.views)"
+        searchResultImage.downloadImage(from: hit.largeImageURL)
     }
 
 
     private func configure() {
-        
-        addSubview(image)
+
+        addSubview(searchResultImage)
         addSubview(views)
 
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
-            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
-            image.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
-            image.heightAnchor.constraint(equalTo: image.widthAnchor),
+            searchResultImage.topAnchor.constraint(equalTo: self.topAnchor, constant: padding),
+            searchResultImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            searchResultImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
+            searchResultImage.heightAnchor.constraint(equalTo: searchResultImage.widthAnchor),
 
-            views.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 2),
+            views.topAnchor.constraint(equalTo: searchResultImage.bottomAnchor, constant: 2),
             views.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             views.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             views.heightAnchor.constraint(equalToConstant: 20)
