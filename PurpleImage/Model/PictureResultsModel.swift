@@ -9,14 +9,15 @@ import Foundation
 
 struct hits: Codable, Hashable {
     var hits: [Hit]
+    let totalHits: Int
 }
 
 struct Hit: Identifiable, Codable, Hashable {
-    var id: Int
-    var pageURL: String
-    var largeImageURL: String
-    var webformatURL: String
-    var views: Int
-    var user: String
-    var tags: String
+    let id: Int
+    let pageURL: String
+    let largeImageURL: String
+    let webformatURL: String
+    let views: Int
+    let user: String
+    let tags: String
 }

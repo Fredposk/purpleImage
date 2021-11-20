@@ -12,7 +12,6 @@ class SearchResultsVC: UIViewController {
     private var results: String!
 
     var resultsCollectionView: UICollectionView!
-
     enum section {
         case main
     }
@@ -20,11 +19,12 @@ class SearchResultsVC: UIViewController {
     var resultsCollectionDiffableData: UICollectionViewDiffableDataSource<section, Hit>!
 
     private var hits: [Hit] = []
+    var page = 1
+    var hasMorePictures = false
 
     init(for result: String) {
         super.init(nibName: nil, bundle: nil)
         self.results = result
-
     }
 
     required init?(coder: NSCoder) {
@@ -35,11 +35,16 @@ class SearchResultsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureNavigationBar()
+
         configureCollectionView()
         configureDataSource()
         networkCall()
 
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureNavigationBar()
     }
 
 
@@ -54,13 +59,15 @@ class SearchResultsVC: UIViewController {
 
     private func networkCall() {
         showLoadingView()
-        NetworkManager.shared.getPictures(for: results, page: 1) { [weak self] results in
+        NetworkManager.shared.getPictures(for: results, page) { [weak self] results in
             guard let self = self else {return}
 
             self.dismissLoadingView()
+
             switch results {
             case .success(let response):
-                self.hits = response.hits
+                if self.hits.count < response.totalHits { self.hasMorePictures = true}
+                self.hits.append(contentsOf: response.hits)
                 self.updateData()
             case .failure(let errorMessage):
                 let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
@@ -89,6 +96,7 @@ class SearchResultsVC: UIViewController {
         resultsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: configureCollectionViewLayout())
         view.addSubview(resultsCollectionView)
         resultsCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)
+        resultsCollectionView.delegate = self
     }
 
     func configureDataSource() {
@@ -114,3 +122,28 @@ class SearchResultsVC: UIViewController {
 }
 
 
+extension SearchResultsVC: UICollectionViewDelegate {
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - screenHeight  {
+            if hasMorePictures {
+                page += 1
+                networkCall()
+            }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destinationVC = SelectedPictureVC()
+        destinationVC.url = hits[indexPath.item].largeImageURL
+        destinationVC.modalPresentationStyle = .pageSheet
+
+        let nav = UINavigationController(rootViewController: destinationVC)
+        present(nav, animated: true)
+
+    }
+}

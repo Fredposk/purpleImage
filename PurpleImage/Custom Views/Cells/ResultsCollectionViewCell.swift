@@ -33,9 +33,18 @@ class ResultsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setResult(for hit: Hit) {
+     func setResult(for hit: Hit) {
         views.text = "Views: \(hit.views)"
-        searchResultImage.downloadImage(from: hit.largeImageURL)
+        NetworkManager.shared.downloadImage(from: hit.largeImageURL) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let result):
+                self.searchResultImage.image = result
+            case .failure(_):
+//                failure will keep placeholderImage
+                break
+            }
+        }
     }
 
 

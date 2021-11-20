@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		403E345A27495B5800850FF4 /* SelectedPictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345927495B5800850FF4 /* SelectedPictureVC.swift */; };
 		405703B42739477C0095BD5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703B32739477C0095BD5E /* AppDelegate.swift */; };
 		405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703B52739477C0095BD5E /* SceneDelegate.swift */; };
 		405703BD2739477E0095BD5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 405703BC2739477E0095BD5E /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		403E345927495B5800850FF4 /* SelectedPictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPictureVC.swift; sourceTree = "<group>"; };
 		405703B02739477C0095BD5E /* PurpleImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurpleImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		405703B32739477C0095BD5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		405703B52739477C0095BD5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				405703C727394ABC0095BD5E /* SearchPicturesVC.swift */,
 				405703C927394AD00095BD5E /* FavoritesVC.swift */,
 				40895A75273A82D000276AE2 /* SearchResultsVC.swift */,
+				403E345927495B5800850FF4 /* SelectedPictureVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */,
 				40895A74273A70C500276AE2 /* PiButton.swift in Sources */,
 				40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */,
+				403E345A27495B5800850FF4 /* SelectedPictureVC.swift in Sources */,
 				405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
