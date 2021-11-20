@@ -27,8 +27,9 @@ class SelectedPictureVC: UIViewController {
 
 
    private func configureView() {
-        view.backgroundColor = .systemBackground
+       view.backgroundColor = .systemBackground
        view.addSubview(selectedImage)
+       
     }
 
     private func configureNavigationBar() {
@@ -60,7 +61,7 @@ class SelectedPictureVC: UIViewController {
         NSLayoutConstraint.activate([
             selectedImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             selectedImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            selectedImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 5),
+            selectedImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             selectedImage.heightAnchor.constraint(equalToConstant: view.frame.height/2)
         ])
     }

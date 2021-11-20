@@ -32,6 +32,7 @@ class PiResultImageView: UIImageView {
         layer.borderColor = UIColor.secondarySystemBackground.cgColor
         clipsToBounds = true
         contentMode = .scaleAspectFill
+        isUserInteractionEnabled = true
     }
 
 //     func downloadImage(from urlString: String) {
