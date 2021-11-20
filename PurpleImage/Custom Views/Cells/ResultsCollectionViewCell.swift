@@ -10,7 +10,7 @@ import UIKit
 class ResultsCollectionViewCell: UICollectionViewCell {
 
     static let ReuseID = "ResultsCell"
-    private var searchResultImage = PiSearchResultImageView(frame: .zero)
+    private var searchResultImage = PiResultImageView(frame: .zero)
 
 
     private var views: UILabel = {

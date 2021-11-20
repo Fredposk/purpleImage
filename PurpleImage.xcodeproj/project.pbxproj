@@ -21,7 +21,7 @@
 		40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7B273B10A000276AE2 /* PictureResultsModel.swift */; };
 		40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7D273B136800276AE2 /* ErrorMessage.swift */; };
 		40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */; };
-		40D8D1682743DFA200FAD588 /* PiSearchResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */; };
+		40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D1672743DFA200FAD588 /* PiResultImageView.swift */; };
 		40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,7 @@
 		40895A7B273B10A000276AE2 /* PictureResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureResultsModel.swift; sourceTree = "<group>"; };
 		40895A7D273B136800276AE2 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
-		40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiSearchResultImageView.swift; sourceTree = "<group>"; };
+		40D8D1672743DFA200FAD588 /* PiResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiResultImageView.swift; sourceTree = "<group>"; };
 		40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +116,7 @@
 				40A22962273DD498002DF56D /* Cells */,
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
 				40895A73273A70C500276AE2 /* PiButton.swift */,
-				40D8D1672743DFA200FAD588 /* PiSearchResultImageView.swift */,
+				40D8D1672743DFA200FAD588 /* PiResultImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40D8D1682743DFA200FAD588 /* PiSearchResultImageView.swift in Sources */,
+				40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */,
 				40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */,
 				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
