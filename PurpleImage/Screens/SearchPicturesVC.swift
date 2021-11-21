@@ -123,6 +123,7 @@ class SearchPicturesVC: UIViewController {
 extension SearchPicturesVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textfield.resignFirstResponder()
+        didTapActionButton()
         return true
     }
 }

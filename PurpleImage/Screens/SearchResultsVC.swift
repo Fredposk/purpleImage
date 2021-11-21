@@ -139,7 +139,10 @@ extension SearchResultsVC: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationVC = SelectedPictureVC()
-        destinationVC.url = hits[indexPath.item].largeImageURL
+        let chosenItem = hits[indexPath.item]
+        destinationVC.url = chosenItem.largeImageURL
+        destinationVC.tags = chosenItem.tagsArray
+        destinationVC.user = chosenItem.user
         destinationVC.modalPresentationStyle = .pageSheet
 
         let nav = UINavigationController(rootViewController: destinationVC)

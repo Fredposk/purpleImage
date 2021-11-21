@@ -20,4 +20,12 @@ struct Hit: Identifiable, Codable, Hashable {
     let views: Int
     let user: String
     let tags: String
+
+    var tagsArray: [String]  {
+        tags.description.components(separatedBy: " ")
+    }
 }
+
+
+
+
