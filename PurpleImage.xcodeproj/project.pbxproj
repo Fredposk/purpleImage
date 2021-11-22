@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		403E345A27495B5800850FF4 /* SelectedPictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345927495B5800850FF4 /* SelectedPictureVC.swift */; };
 		403E345C274AE2F300850FF4 /* TagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345B274AE2F300850FF4 /* TagsCollectionViewCell.swift */; };
+		403E345E274C1D3800850FF4 /* PiLikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345D274C1D3800850FF4 /* PiLikeButton.swift */; };
 		405703B42739477C0095BD5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703B32739477C0095BD5E /* AppDelegate.swift */; };
 		405703B62739477C0095BD5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703B52739477C0095BD5E /* SceneDelegate.swift */; };
 		405703BD2739477E0095BD5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 405703BC2739477E0095BD5E /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		403E345927495B5800850FF4 /* SelectedPictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPictureVC.swift; sourceTree = "<group>"; };
 		403E345B274AE2F300850FF4 /* TagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionViewCell.swift; sourceTree = "<group>"; };
+		403E345D274C1D3800850FF4 /* PiLikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiLikeButton.swift; sourceTree = "<group>"; };
 		405703B02739477C0095BD5E /* PurpleImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurpleImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		405703B32739477C0095BD5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		405703B52739477C0095BD5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
 				40895A73273A70C500276AE2 /* PiButton.swift */,
 				40D8D1672743DFA200FAD588 /* PiResultImageView.swift */,
+				403E345D274C1D3800850FF4 /* PiLikeButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
 				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
+				403E345E274C1D3800850FF4 /* PiLikeButton.swift in Sources */,
 				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,
 				40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */,

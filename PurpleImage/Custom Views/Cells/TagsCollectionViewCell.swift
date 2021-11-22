@@ -10,16 +10,29 @@ import UIKit
 class TagsCollectionViewCell: UICollectionViewCell {
     static let ReuseID = "tagCell"
 
-    private var label: String!
+    private var label: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textColor = .white
+
+        return label
+    }()
+
+    private var imageTag: String!
 
 
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
 
-    init(label: String) {
+    init(with tag: String) {
         super.init(frame: .zero)
-        self.label = label
+        self.imageTag = tag
+        label.text = tag
         configure()
 
     }
@@ -29,7 +42,17 @@ class TagsCollectionViewCell: UICollectionViewCell {
     }
 
     func configure() {
+        addSubview(label)
+
         translatesAutoresizingMaskIntoConstraints = false
+
+        layer.cornerRadius = self.frame.height/2
+        backgroundColor = .black
+
+        NSLayoutConstraint.activate([
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        ])
     }
 
 

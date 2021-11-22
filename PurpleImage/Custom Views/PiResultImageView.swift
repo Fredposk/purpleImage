@@ -9,7 +9,7 @@ import UIKit
 
 class PiResultImageView: UIImageView {
 
-    private var placeholder = UIImage(systemName: "arrow.triangle.2.circlepath.camera")
+//    private var placeholder = UIImage(systemName: "arrow.triangle.2.circlepath.camera")
     private var cache = NetworkManager.shared.cache
 
     override init(frame: CGRect) {
@@ -23,11 +23,14 @@ class PiResultImageView: UIImageView {
 
 
 
+
+
     private func configure() {
+
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 10
-        image = placeholder
-        placeholder?.withTintColor(.systemPurple)
+//        image = placeholder
+//        placeholder?.withTintColor(.systemPurple)
         layer.borderWidth = 3
         layer.borderColor = UIColor.secondarySystemBackground.cgColor
         clipsToBounds = true

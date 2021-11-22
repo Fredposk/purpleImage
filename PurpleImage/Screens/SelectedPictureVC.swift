@@ -15,8 +15,10 @@ class SelectedPictureVC: UIViewController {
     var tags: [String]!
     var pageURL: String!
     var largeImageURL: String!
+    var id: Int!
 
     let selectedImage = PiResultImageView(frame: .zero)
+    lazy var likeButton = PiLikeButton(with: id)
 
     private let userName: UILabel = {
         let label = UILabel()
@@ -36,6 +38,7 @@ class SelectedPictureVC: UIViewController {
         configureView()
         downloadImage()
         configureData()
+        configureCollectionView()
         configureLayouts()
 
     }
@@ -44,9 +47,14 @@ class SelectedPictureVC: UIViewController {
 
    private func configureView() {
        view.backgroundColor = .systemBackground
+       view.addSubview(likeButton)
        view.addSubview(selectedImage)
        view.addSubview(userName)
-       
+       view.isUserInteractionEnabled = true
+
+       view.bringSubviewToFront(likeButton)
+
+
     }
 
     private func configureNavigationBar() {
@@ -61,9 +69,15 @@ class SelectedPictureVC: UIViewController {
         dismiss(animated: true)
     }
 
+
     private func downloadImage() {
+        showLoadingView()
         NetworkManager.shared.downloadImage(from: url) { [weak self ] result in
+
             guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+            }
             switch result {
             case .success(let image):
                 self.selectedImage.image = image
@@ -79,7 +93,22 @@ class SelectedPictureVC: UIViewController {
     private func configureData() {
         userName.text = user
     }
+
+//    TODO: layout collectionview
+    private func configureCollectionView() {
+        let layout = UICollectionViewLayout()
+
+
+        labelCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.addSubview(labelCollectionView)
+        labelCollectionView.register(TagsCollectionViewCell.self, forCellWithReuseIdentifier: TagsCollectionViewCell.ReuseID)
+        
+    }
+
+
     private func configureLayouts() {
+
+        
         NSLayoutConstraint.activate([
             selectedImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             selectedImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
@@ -89,7 +118,13 @@ class SelectedPictureVC: UIViewController {
             userName.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: 40),
             userName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             userName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            userName.heightAnchor.constraint(equalToConstant: 22)
+            userName.heightAnchor.constraint(equalToConstant: 22),
+
+            likeButton.heightAnchor.constraint(equalToConstant: 30),
+            likeButton.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -10),
+            likeButton.bottomAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: -10),
+            likeButton.widthAnchor.constraint(equalToConstant: 30)
+
         ])
     }
 

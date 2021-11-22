@@ -35,7 +35,7 @@ class ResultsCollectionViewCell: UICollectionViewCell {
 
      func setResult(for hit: Hit) {
         views.text = "Views: \(hit.views)"
-        NetworkManager.shared.downloadImage(from: hit.largeImageURL) { [weak self] result in
+        NetworkManager.shared.downloadImage(from: hit.webformatURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let result):

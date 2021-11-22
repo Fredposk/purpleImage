@@ -80,21 +80,32 @@ class SearchResultsVC: UIViewController {
      func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
 
         let screenWidth = view.bounds.width
-        let itemPadding: CGFloat = 10
-        let minimumItemSpacing: CGFloat = 20
+        let itemPadding: CGFloat = 20
+        let minimumItemSpacing: CGFloat = 10
         let availableWidth = screenWidth - (itemPadding * 2) - (minimumItemSpacing * 2)
         let itemSize = availableWidth/2
 
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemSize, height: itemSize+30)
-        layout.sectionInset = UIEdgeInsets(top: itemPadding, left: itemPadding,  bottom: itemPadding, right: itemPadding)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: itemPadding,  bottom: 0, right: itemPadding)
+
 
         return layout
     }
 
     func configureCollectionView() {
-        resultsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: configureCollectionViewLayout())
+        resultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+        resultsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(resultsCollectionView)
+        
+
+        NSLayoutConstraint.activate([
+            resultsCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            resultsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            resultsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            resultsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
         resultsCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)
         resultsCollectionView.delegate = self
     }
@@ -143,6 +154,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.url = chosenItem.largeImageURL
         destinationVC.tags = chosenItem.tagsArray
         destinationVC.user = chosenItem.user
+        destinationVC.id = chosenItem.id
         destinationVC.modalPresentationStyle = .pageSheet
 
         let nav = UINavigationController(rootViewController: destinationVC)
