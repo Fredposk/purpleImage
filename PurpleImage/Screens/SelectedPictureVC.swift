@@ -50,7 +50,7 @@ class SelectedPictureVC: UIViewController {
        view.addSubview(likeButton)
        view.addSubview(selectedImage)
        view.addSubview(userName)
-       view.isUserInteractionEnabled = true
+       
 
        view.bringSubviewToFront(likeButton)
 
@@ -126,7 +126,6 @@ class SelectedPictureVC: UIViewController {
 
     private func configureLayouts() {
 
-        
         NSLayoutConstraint.activate([
             selectedImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             selectedImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
