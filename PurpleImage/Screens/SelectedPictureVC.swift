@@ -96,13 +96,31 @@ class SelectedPictureVC: UIViewController {
 
 //    TODO: layout collectionview
     private func configureCollectionView() {
-        let layout = UICollectionViewLayout()
 
 
-        labelCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        labelCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.addSubview(labelCollectionView)
         labelCollectionView.register(TagsCollectionViewCell.self, forCellWithReuseIdentifier: TagsCollectionViewCell.ReuseID)
-        
+        labelCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        labelCollectionView.delegate = self
+        labelCollectionView.dataSource = self
+    }
+
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+
+//        Item
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1.0))
+        )
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+//        Group
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: item, count: tags.count)
+//        Section
+        let section = NSCollectionLayoutSection(group: group)
+
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
 
@@ -115,7 +133,12 @@ class SelectedPictureVC: UIViewController {
             selectedImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             selectedImage.heightAnchor.constraint(equalToConstant: view.frame.height/2),
 
-            userName.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: 40),
+            labelCollectionView.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: 20),
+            labelCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            labelCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            labelCollectionView.heightAnchor.constraint(equalToConstant: 25),
+
+            userName.topAnchor.constraint(equalTo: labelCollectionView.bottomAnchor, constant: 15),
             userName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             userName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             userName.heightAnchor.constraint(equalToConstant: 22),
@@ -123,9 +146,23 @@ class SelectedPictureVC: UIViewController {
             likeButton.heightAnchor.constraint(equalToConstant: 30),
             likeButton.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -10),
             likeButton.bottomAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: -10),
-            likeButton.widthAnchor.constraint(equalToConstant: 30)
+            likeButton.widthAnchor.constraint(equalToConstant: 30),
 
         ])
     }
+
+}
+
+extension SelectedPictureVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        tags.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = labelCollectionView.dequeueReusableCell(withReuseIdentifier: TagsCollectionViewCell.ReuseID, for: indexPath) as! TagsCollectionViewCell
+        cell.setData(with: tags[indexPath.row])
+        return cell
+    }
+
 
 }

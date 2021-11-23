@@ -16,25 +16,25 @@ class TagsCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.textColor = .label
+        label.lineBreakMode = .byTruncatingTail
+        label.minimumScaleFactor = 0.7
 
         return label
     }()
 
-    private var imageTag: String!
+     var imageTag: String!
 
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
     }
 
-    init(with tag: String) {
-        super.init(frame: .zero)
-        self.imageTag = tag
-        label.text = tag
-        configure()
 
+    func setData(with tag: String) {
+        label.text = tag
     }
 
     required init?(coder: NSCoder) {
@@ -43,11 +43,9 @@ class TagsCollectionViewCell: UICollectionViewCell {
 
     func configure() {
         addSubview(label)
-
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .secondarySystemBackground
 
         layer.cornerRadius = self.frame.height/2
-        backgroundColor = .black
 
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor),

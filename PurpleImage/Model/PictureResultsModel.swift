@@ -19,10 +19,12 @@ struct Hit: Identifiable, Codable, Hashable {
     let webformatURL: String
     let views: Int
     let user: String
-    let tags: String
+    var tags: String
 
     var tagsArray: [String]  {
-        tags.description.components(separatedBy: " ")
+       return tags.replacingOccurrences(of: ",", with: "").description.components(separatedBy: " ")
+
+
     }
 }
 

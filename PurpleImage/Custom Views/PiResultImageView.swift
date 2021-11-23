@@ -32,7 +32,7 @@ class PiResultImageView: UIImageView {
 //        image = placeholder
 //        placeholder?.withTintColor(.systemPurple)
         layer.borderWidth = 3
-        layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        layer.borderColor = UIColor.label.cgColor
         clipsToBounds = true
         contentMode = .scaleAspectFill
         isUserInteractionEnabled = true
