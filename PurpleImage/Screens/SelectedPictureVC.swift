@@ -13,6 +13,7 @@ class SelectedPictureVC: UIViewController {
     var views: Int!
     var user: String!
     var tags: [String]!
+    var testTags = ["Cool", "NICE", "Inter", "tasty", "delic", "banana", "grape"]
     var pageURL: String!
     var largeImageURL: String!
     var id: Int!
@@ -51,7 +52,6 @@ class SelectedPictureVC: UIViewController {
        view.addSubview(selectedImage)
        view.addSubview(userName)
        
-
        view.bringSubviewToFront(likeButton)
 
 
@@ -104,22 +104,25 @@ class SelectedPictureVC: UIViewController {
         labelCollectionView.translatesAutoresizingMaskIntoConstraints = false
         labelCollectionView.delegate = self
         labelCollectionView.dataSource = self
+
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
 
 //        Item
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1.0))
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         )
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
 //        Group
 
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: item, count: tags.count)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1), heightDimension: .absolute(25)), subitem: item, count: 1)
+
 //        Section
         let section = NSCollectionLayoutSection(group: group)
 
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         return UICollectionViewCompositionalLayout(section: section)
     }
 
