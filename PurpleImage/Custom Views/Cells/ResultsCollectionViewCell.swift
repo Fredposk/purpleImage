@@ -56,7 +56,7 @@ class ResultsCollectionViewCell: UICollectionViewCell {
 
         contentContainer.addSubview(searchResultImage)
         contentContainer.translatesAutoresizingMaskIntoConstraints = false
-        searchResultImage.translatesAutoresizingMaskIntoConstraints = false
+//        searchResultImage.translatesAutoresizingMaskIntoConstraints = false
 //        addSubview(views)
 
         NSLayoutConstraint.activate([

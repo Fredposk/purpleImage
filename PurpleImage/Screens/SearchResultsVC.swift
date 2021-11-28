@@ -77,35 +77,15 @@ class SearchResultsVC: UIViewController {
         }
     }
 
-//     func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
-//
-//        let screenWidth = view.bounds.width
-//        let itemPadding: CGFloat = 20
-//        let minimumItemSpacing: CGFloat = 10
-//        let availableWidth = screenWidth - (itemPadding * 2) - (minimumItemSpacing * 2)
-//        let itemSize = availableWidth/2
-//
-//        let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: itemSize, height: itemSize+30)
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: itemPadding,  bottom: 0, right: itemPadding)
-//
-//
-//        return layout
-//    }
-
     func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-
 //        items
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.5)))
-
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 //        group
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200)), subitem: item, count: 2)
-
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5)), subitem: item, count: 2)
 //        section
         let section = NSCollectionLayoutSection(group: group)
-
         return UICollectionViewCompositionalLayout(section: section)
-
 
     }
 
@@ -171,6 +151,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.tags = chosenItem.tagsArray
         destinationVC.user = chosenItem.user
         destinationVC.id = chosenItem.id
+        destinationVC.pageURL = chosenItem.pageURL
         destinationVC.modalPresentationStyle = .pageSheet
 
         let nav = UINavigationController(rootViewController: destinationVC)

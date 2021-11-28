@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SelectedPictureVC: UIViewController {
 
@@ -13,7 +14,7 @@ class SelectedPictureVC: UIViewController {
     var views: Int!
     var user: String!
     var tags: [String]!
-    var testTags = ["Cool", "NICE", "Inter", "tasty", "delic", "banana", "grape"]
+//    var testTags = ["Cool", "NICE", "Inter", "tasty", "delic", "banana", "grape"]
     var pageURL: String!
     var largeImageURL: String!
     var id: Int!
@@ -26,6 +27,16 @@ class SelectedPictureVC: UIViewController {
         label.textColor = .systemPurple
         label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
         label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let testSafariLink: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemPurple
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "click to link"
+        label.isUserInteractionEnabled = true
         return label
     }()
 
@@ -51,10 +62,22 @@ class SelectedPictureVC: UIViewController {
        view.addSubview(likeButton)
        view.addSubview(selectedImage)
        view.addSubview(userName)
-       
-       view.bringSubviewToFront(likeButton)
+       view.addSubview(likeButton)
 
 
+//       MARK: safari webview
+       view.addSubview(testSafariLink)
+       testSafariLink.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
+
+    }
+
+    @objc func didClickSafariLink() {
+        guard let url = URL(string: pageURL) else {
+            return
+        }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .systemPurple
+        present(safariVC, animated: true)
     }
 
     private func configureNavigationBar() {
@@ -94,7 +117,10 @@ class SelectedPictureVC: UIViewController {
         userName.text = user
     }
 
-//    TODO: layout collectionview
+
+
+
+
     private func configureCollectionView() {
 
 
@@ -114,10 +140,17 @@ class SelectedPictureVC: UIViewController {
             widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         )
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+
+        let item2 = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        )
+        item2.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+
+
 //        Group
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1), heightDimension: .absolute(25)), subitem: item, count: 1)
+            widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(25)), subitems: [item, item2])
 
 //        Section
         let section = NSCollectionLayoutSection(group: group)
@@ -150,6 +183,11 @@ class SelectedPictureVC: UIViewController {
             likeButton.bottomAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: -10),
             likeButton.widthAnchor.constraint(equalToConstant: 30),
 
+            testSafariLink.heightAnchor.constraint(equalToConstant: 25),
+            testSafariLink.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            testSafariLink.widthAnchor.constraint(equalToConstant: 100),
+            testSafariLink.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+
         ])
     }
 
@@ -164,6 +202,13 @@ extension SelectedPictureVC: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell = labelCollectionView.dequeueReusableCell(withReuseIdentifier: TagsCollectionViewCell.ReuseID, for: indexPath) as! TagsCollectionViewCell
         cell.setData(with: tags[indexPath.row])
         return cell
+    }
+
+
+    func presentSafariVC(with url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .systemPurple
+        present(safariVC, animated: true)
     }
 
 
