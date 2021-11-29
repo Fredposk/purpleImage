@@ -36,7 +36,7 @@ class PiTextField: UITextField {
        backgroundColor = .tertiarySystemBackground
        autocorrectionType = .no
        keyboardType = .alphabet
-
+       clearButtonMode = .whileEditing
        placeholder = "Start image Search"
 
 

@@ -99,6 +99,8 @@ class SearchPicturesVC: UIViewController {
         }
 
         let nav = SearchResultsVC(for: searchText)
+        textfield.resignFirstResponder()
+        textfield.text = ""
         navigationController?.pushViewController(nav, animated: true)
 
     }
@@ -122,7 +124,6 @@ class SearchPicturesVC: UIViewController {
 
 extension SearchPicturesVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textfield.resignFirstResponder()
         didTapActionButton()
         return true
     }
