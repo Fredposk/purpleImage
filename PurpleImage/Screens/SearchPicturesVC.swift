@@ -9,7 +9,6 @@ import UIKit
 
 class SearchPicturesVC: UIViewController {
 
-
     private let logoImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: "purple"))
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +47,6 @@ class SearchPicturesVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-
 
      func configureLogoImageView() {
         view.addSubview(logoImage)
@@ -115,6 +113,7 @@ class SearchPicturesVC: UIViewController {
         ])
     }
 
+//    - TODO: go to website
     @objc func didTapPrivacyLabel() {
         print("hello")
     }

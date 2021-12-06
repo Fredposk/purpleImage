@@ -77,23 +77,12 @@ class SearchResultsVC: UIViewController {
         }
     }
 
-    func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-//        items
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.5)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-//        group
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5)), subitem: item, count: 2)
-//        section
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
 
-    }
 
     func configureCollectionView() {
-        resultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+        resultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.configureSearchResultsLayout())
         resultsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(resultsCollectionView)
-        
 
         NSLayoutConstraint.activate([
             resultsCollectionView.topAnchor.constraint(equalTo: view.topAnchor),

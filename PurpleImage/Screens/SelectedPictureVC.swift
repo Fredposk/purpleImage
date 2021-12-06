@@ -14,7 +14,6 @@ class SelectedPictureVC: UIViewController {
     var views: Int!
     var user: String!
     var tags: [String]!
-//    var testTags = ["Cool", "NICE", "Inter", "tasty", "delic", "banana", "grape"]
     var pageURL: String!
     var largeImageURL: String!
     var id: Int!
@@ -116,10 +115,6 @@ class SelectedPictureVC: UIViewController {
     private func configureData() {
         userName.text = user
     }
-
-
-
-
 
     private func configureCollectionView() {
 
