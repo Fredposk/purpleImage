@@ -13,6 +13,7 @@ enum errorMessage: String, Error {
     case invalidHTTPResponse = "invalid response from server"
     case invalidData = "invalid data from server"
     case errorParsingData = "error decoding data"
+    case noResults = "No results, try another search!"
 
     
 }

@@ -9,14 +9,11 @@ import Foundation
 import UIKit
 
 final class NetworkManager {
-
-
     static let shared = NetworkManager()
     private let baseURL = "https://pixabay.com/api/?key=24258005-77fd453beb301eb32e3abf948&q="
     let cache = NSCache<NSString, UIImage>()
 
     private init() {}
-
 }
 
 extension NetworkManager {

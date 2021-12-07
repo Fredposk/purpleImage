@@ -14,21 +14,17 @@ class PiResultImageView: UIImageView {
         configure()
     }
 
+ 
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     private func configure() {
-
+//        backgroundColor = .white.withAlphaComponent(0.8)
         translatesAutoresizingMaskIntoConstraints = false
-//        layer.cornerRadius = 10
-//        layer.borderWidth = 3
-//        layer.borderColor = UIColor.label.cgColor
-        backgroundColor = .secondaryLabel
         clipsToBounds = true
         contentMode = .scaleAspectFill
         isUserInteractionEnabled = true
     }
-
-
 }

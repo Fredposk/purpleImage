@@ -31,7 +31,6 @@ class SearchResultsVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -47,8 +46,6 @@ class SearchResultsVC: UIViewController {
         configureNavigationBar()
     }
 
-
-
     private func configureNavigationBar() {
         title = results
         navigationController?.isNavigationBarHidden = false
@@ -61,23 +58,38 @@ class SearchResultsVC: UIViewController {
         showLoadingView()
         NetworkManager.shared.getPictures(for: results, page) { [weak self] results in
             guard let self = self else {return}
-
             self.dismissLoadingView()
-
             switch results {
             case .success(let response):
+                guard response.totalHits > 0 else {
+                    self.noResultsReceived()
+                    return
+                }
                 if self.hits.count < response.totalHits { self.hasMorePictures = true}
+                if self.hits.count == response.totalHits {self.hasMorePictures = false}
                 self.hits.append(contentsOf: response.hits)
                 self.updateData()
+
             case .failure(let errorMessage):
+                DispatchQueue.main.async {
                 let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
 
-
+    func noResultsReceived() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "No Results", message: errorMessage.noResults.rawValue, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        return
+    }
 
     func configureCollectionView() {
         resultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.configureSearchResultsLayout())
@@ -113,8 +125,6 @@ class SearchResultsVC: UIViewController {
             self.resultsCollectionDiffableData.apply(snapShot)
         }
     }
-
-
 }
 
 
@@ -141,6 +151,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.user = chosenItem.user
         destinationVC.id = chosenItem.id
         destinationVC.pageURL = chosenItem.pageURL
+        destinationVC.views = chosenItem.views
         destinationVC.modalPresentationStyle = .pageSheet
 
         let nav = UINavigationController(rootViewController: destinationVC)
