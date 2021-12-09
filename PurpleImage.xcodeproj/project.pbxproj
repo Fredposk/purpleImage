@@ -22,6 +22,8 @@
 		40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A78273B0DDF00276AE2 /* NetworkManager.swift */; };
 		40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7B273B10A000276AE2 /* PictureResultsModel.swift */; };
 		40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A7D273B136800276AE2 /* ErrorMessage.swift */; };
+		408B024027611FE3002F37B0 /* PiBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B023F27611FE3002F37B0 /* PiBodyLabel.swift */; };
+		408B024227614F9C002F37B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B024127614F9C002F37B0 /* Constants.swift */; };
 		409EC4AD275E6DBB00C2ABC9 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EC4AC275E6DBB00C2ABC9 /* UIHelpers.swift */; };
 		40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */; };
 		40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D1672743DFA200FAD588 /* PiResultImageView.swift */; };
@@ -46,6 +48,8 @@
 		40895A78273B0DDF00276AE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		40895A7B273B10A000276AE2 /* PictureResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureResultsModel.swift; sourceTree = "<group>"; };
 		40895A7D273B136800276AE2 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		408B023F27611FE3002F37B0 /* PiBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiBodyLabel.swift; sourceTree = "<group>"; };
+		408B024127614F9C002F37B0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		409EC4AC275E6DBB00C2ABC9 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
 		40D8D1672743DFA200FAD588 /* PiResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiResultImageView.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
 				40895A73273A70C500276AE2 /* PiButton.swift */,
 				40D8D1672743DFA200FAD588 /* PiResultImageView.swift */,
+				408B023F27611FE3002F37B0 /* PiBodyLabel.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			children = (
 				40895A7D273B136800276AE2 /* ErrorMessage.swift */,
 				409EC4AC275E6DBB00C2ABC9 /* UIHelpers.swift */,
+				408B024127614F9C002F37B0 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */,
+				408B024227614F9C002F37B0 /* Constants.swift in Sources */,
 				403E345C274AE2F300850FF4 /* TagsCollectionViewCell.swift in Sources */,
 				40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */,
 				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
@@ -263,6 +270,7 @@
 				40895A74273A70C500276AE2 /* PiButton.swift in Sources */,
 				40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */,
 				402DFAEA275FED97000B25F0 /* DetailsVC.swift in Sources */,
+				408B024027611FE3002F37B0 /* PiBodyLabel.swift in Sources */,
 				403E345A27495B5800850FF4 /* SelectedPictureVC.swift in Sources */,
 				405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */,
 			);

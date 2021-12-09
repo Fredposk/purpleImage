@@ -152,10 +152,11 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.id = chosenItem.id
         destinationVC.pageURL = chosenItem.pageURL
         destinationVC.views = chosenItem.views
-        destinationVC.modalPresentationStyle = .pageSheet
+        destinationVC.userImageURL = chosenItem.userImageURL
+        destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(chosenItem.user)-\(chosenItem.userId)/")!
+        
 
-        let nav = UINavigationController(rootViewController: destinationVC)
-        present(nav, animated: true)
+        navigationController?.pushViewController(destinationVC, animated: true)
 
     }
 }

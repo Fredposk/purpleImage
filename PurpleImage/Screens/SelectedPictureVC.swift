@@ -17,6 +17,8 @@ class SelectedPictureVC: UIViewController {
     var pageURL: String!
     var largeImageURL: String!
     var id: Int!
+    var userImageURL: String!
+    var userProfileUrl: URL!
 
     var pictureSaved = false
 
@@ -24,14 +26,12 @@ class SelectedPictureVC: UIViewController {
 
     let container = UIView(frame: .zero)
 
-
-
-    private let testSafariLink: UILabel = {
+    private let viewOnSafariLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemPurple
         label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "click to link"
+        label.text = "View on Pixabay"
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -40,33 +40,30 @@ class SelectedPictureVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureView()
         downloadImage()
 //        configureData()
 //        configureCollectionView()
+        configureNavigationBar()
         configureLayouts()
         configureDoubleTapAction()
 
-
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureNavigationBar()
-    }
-    
 
 
    private func configureView() {
        view.backgroundColor = .systemBackground
        view.addSubview(selectedImage)
 
-       add(DetailsVC(totalViews: views, userName: user, userImageUrl: "todo"), to: container)
+       let detailsVC = DetailsVC(totalViews: views, userName: user, userImageUrl: userImageURL)
+       detailsVC.delegate = self
+       add(detailsVC, to: container)
+
 
 //       MARK: safari webview
-       view.addSubview(testSafariLink)
-       testSafariLink.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
+       view.addSubview(viewOnSafariLabel)
+       viewOnSafariLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
 
     }
 
@@ -82,13 +79,15 @@ class SelectedPictureVC: UIViewController {
     private func configureNavigationBar() {
 
          navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = false
          navigationController?.navigationBar.tintColor = .systemPurple
-         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDoneButton))
-         navigationItem.rightBarButtonItem = doneButton
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapDoneButton))
+
 
 //        run database check to save picture
-        let likeButton = UIBarButtonItem(image: UIImage(systemName: pictureSaved ? "heart.fill" : "heart" ), style: .done, target: self, action: #selector(changeSavedStatus))
-        navigationItem.leftBarButtonItem = likeButton
+        let likeButton = UIBarButtonItem(image: UIImage(systemName: pictureSaved ? Images.heartedImage : Images.notHeartedImage ), style: .done, target: self, action: #selector(changeSavedStatus))
+        navigationItem.rightBarButtonItems = [shareButton, likeButton]
+
     }
 
     @objc func changeSavedStatus() {
@@ -97,6 +96,7 @@ class SelectedPictureVC: UIViewController {
     }
 
     @objc func didTapDoneButton() {
+//        Change this to share image
         dismiss(animated: true)
     }
 
@@ -146,36 +146,32 @@ class SelectedPictureVC: UIViewController {
             selectedImage.heightAnchor.constraint(equalToConstant: view.frame.height/2),
 
             container.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: 5),
-            container.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor),
-            container.heightAnchor.constraint(equalToConstant: 90),
+            container.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor, constant: 5),
+            container.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -5),
+            container.heightAnchor.constraint(equalToConstant: 60),
 
-            testSafariLink.heightAnchor.constraint(equalToConstant: 25),
-            testSafariLink.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
-            testSafariLink.widthAnchor.constraint(equalToConstant: 100),
-            testSafariLink.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 25),
+            viewOnSafariLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2),
+            viewOnSafariLabel.widthAnchor.constraint(equalToConstant: 120),
+            viewOnSafariLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }
 }
 
-extension SelectedPictureVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        tags.count
+extension SelectedPictureVC: UserDetail {
+    
+    func didTapUserLink() {
+        presentSafariVC(with: userProfileUrl)
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = labelCollectionView.dequeueReusableCell(withReuseIdentifier: TagsCollectionViewCell.ReuseID, for: indexPath) as! TagsCollectionViewCell
-        cell.setData(with: tags[indexPath.row])
-        return cell
-    }
-
 
     func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.preferredControlTintColor = .systemPurple
         present(safariVC, animated: true)
     }
+
+
 
 
 }

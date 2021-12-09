@@ -21,7 +21,6 @@ class PiResultImageView: UIImageView {
     }
 
     private func configure() {
-//        backgroundColor = .white.withAlphaComponent(0.8)
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
         contentMode = .scaleAspectFill

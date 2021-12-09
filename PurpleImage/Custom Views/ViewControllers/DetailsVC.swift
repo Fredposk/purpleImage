@@ -7,37 +7,28 @@
 
 import UIKit
 
+protocol UserDetail: AnyObject {
+    func didTapUserLink()
+}
+
 class DetailsVC: UIViewController {
 
-    let totalViewsLabel = UILabel()
-    let shareButton = UIImageView.init(image: UIImage(systemName: "square.and.arrow.up"))
-    let safariLinkButton = UIImageView.init(image: UIImage(systemName: "safari"))
-    let userNameLabel = UILabel()
+    weak var delegate: UserDetail?
+
+    let totalViewsLabel = PiBodyLabel(textAlignment: .center, textColor: .secondaryLabel, font: Fonts.viewsLabel)
+    let userNameLabel = PiBodyLabel(textAlignment: .left, textColor: .label, font: Fonts.userNameLabel)
     let userImage = PiResultImageView(frame: .zero)
+    var userImageUrl: String!
 
-//    var buttonsStackView: UIStackView!
-//    var containerStack: UIStackView!
-
-    let separator: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .quaternaryLabel
-        return view
-    }()
-    
+    let userContainer = UIView(frame: .zero)
+    let userLinkImage = UIImageView(image: Images.viewUserChevron)
 
     init(totalViews: Int, userName: String, userImageUrl: String) {
         super.init(nibName: nil, bundle: nil)
         totalViewsLabel.text = "Views: \(totalViews)"
-        userNameLabel.text = userName
-        userImage.image = fetchUserImage()
-
-         func fetchUserImage() -> UIImage {
-
-             return UIImage(systemName: "person.crop.circle")!
-        }
+        userNameLabel.text = "By: \(userName)"
+        self.userImageUrl = userImageUrl
     }
-
 
 
     required init?(coder: NSCoder) {
@@ -46,57 +37,85 @@ class DetailsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPurple
         configureView()
-
-
+        configureUserContainer()
+        configureLayout()
+        fetchUserImage()
+        addClickFunctionToUser()
     }
 
     private func configureView() {
 
-        let items: [UIImageView] = [safariLinkButton, shareButton]
-
-        for item in items {
-            item.isUserInteractionEnabled = true
-            item.translatesAutoresizingMaskIntoConstraints = true
-            item.tintColor = .systemPurple
-            view.addSubview(item)
-        }
-//        buttonsStackView = UIStackView(arrangedSubviews: [safariLinkButton, shareButton])
-//        containerStack = UIStackView(arrangedSubviews: [totalViewsLabel, buttonsStackView])
-//        buttonsStackView.backgroundColor = .blue
-//        containerStack.backgroundColor = .red
-//        buttonsStackView.axis = .horizontal
-//
-//        containerStack.axis = .horizontal
-//
-//        containerStack.distribution = .fillEqually
-////        buttonsStackView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-//
-//        view.addSubview(containerStack)
-//
-//        containerStack.translatesAutoresizingMaskIntoConstraints = false
-
         view.addSubview(totalViewsLabel)
-        totalViewsLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(userContainer)
+    }
+
+    private func configureUserContainer() {
+        userContainer.translatesAutoresizingMaskIntoConstraints = false
+        userLinkImage.translatesAutoresizingMaskIntoConstraints = false
+        userContainer.addSubview(userImage)
+        userContainer.addSubview(userNameLabel)
+        userContainer.addSubview(userLinkImage)
+        userLinkImage.tintColor = .label
+        userLinkImage.isUserInteractionEnabled = true
+        userImage.layer.borderWidth = 2
+        userImage.layer.backgroundColor = UIColor.quaternaryLabel.cgColor
+        userImage.layer.cornerRadius = 10
+
+        NSLayoutConstraint.activate([
+            userImage.leadingAnchor.constraint(equalTo: userContainer.leadingAnchor),
+            userImage.topAnchor.constraint(equalTo: userContainer.topAnchor),
+            userImage.widthAnchor.constraint(equalToConstant: 45),
+            userImage.bottomAnchor.constraint(equalTo: userContainer.bottomAnchor),
+
+            userNameLabel.leadingAnchor.constraint(equalTo: userImage.trailingAnchor, constant: 10),
+            userNameLabel.centerYAnchor.constraint(equalTo: userContainer.centerYAnchor),
+
+            userLinkImage.centerYAnchor.constraint(equalTo: userContainer.centerYAnchor),
+            userLinkImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+
+        ])
     }
 
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            separator.heightAnchor.constraint(equalToConstant: 1),
-//
-//            containerStack.topAnchor.constraint(equalTo: view.topAnchor),
-//            containerStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            containerStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//
-//            containerStack.heightAnchor.constraint(equalToConstant: 24)
 
-            totalViewsLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            totalViewsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            totalViewsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 2),
             totalViewsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            totalViewsLabel.heightAnchor.constraint(equalToConstant: 22)
+            totalViewsLabel.heightAnchor.constraint(equalToConstant: 16),
+
+            userContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            userContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            userContainer.heightAnchor.constraint(equalToConstant: 45),
+            userContainer.topAnchor.constraint(equalTo: totalViewsLabel.bottomAnchor, constant: 2)
+
 
         ])
+    }
+
+    private func addClickFunctionToUser() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapChevron))
+        userLinkImage.addGestureRecognizer(tap)
+    }
+
+    @objc func didTapChevron() {
+        delegate?.didTapUserLink()
+    }
+
+    private func fetchUserImage() {
+        NetworkManager.shared.downloadImage(from: userImageUrl) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let result):
+                    self.userImage.image = result
+                case .failure(_):
+                    self.userImage.image = UIImage(systemName: Images.placeHolderUser)
+                }
+            }
+
+        }
     }
     
 

@@ -43,6 +43,7 @@ extension NetworkManager {
                 return
             }
             let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let completedResponse = try decoder.decode(hits.self, from: data)
                 completed(.success(completedResponse))
