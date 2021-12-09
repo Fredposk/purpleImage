@@ -28,7 +28,7 @@ extension NetworkManager {
             completed(.failure(.invalidSearchTerm))
             return
         }
-
+        print(url)
         let task = URLSession.shared.dataTask(with: url) { data, urlResponse, error in
             if let _ = error  {
                 completed(.failure(.networkingError))

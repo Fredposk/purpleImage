@@ -24,7 +24,8 @@ class SelectedPictureVC: UIViewController {
 
     let selectedImage = PiResultImageView(frame: .zero)
 
-    let container = UIView(frame: .zero)
+    let detailsContainer = UIView(frame: .zero)
+    let labelsCollectionViewContainer = UIView(frame: .zero)
 
     private let viewOnSafariLabel: UILabel = {
         let label = UILabel()
@@ -36,18 +37,15 @@ class SelectedPictureVC: UIViewController {
         return label
     }()
 
-    var labelCollectionView: UICollectionView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         downloadImage()
-//        configureData()
-//        configureCollectionView()
         configureNavigationBar()
         configureLayouts()
         configureDoubleTapAction()
-
     }
 
 
@@ -58,7 +56,10 @@ class SelectedPictureVC: UIViewController {
 
        let detailsVC = DetailsVC(totalViews: views, userName: user, userImageUrl: userImageURL)
        detailsVC.delegate = self
-       add(detailsVC, to: container)
+       add(detailsVC, to: detailsContainer)
+
+       let labelsResultVC = LabelsResultVC(labels: tags)
+       add(labelsResultVC, to: labelsCollectionViewContainer)
 
 
 //       MARK: safari webview
@@ -67,6 +68,9 @@ class SelectedPictureVC: UIViewController {
 
     }
 
+
+
+//    -TODO: This function is being extended
     @objc func didClickSafariLink() {
         guard let url = URL(string: pageURL) else {
             return
@@ -138,17 +142,23 @@ class SelectedPictureVC: UIViewController {
 
 
     private func configureLayouts() {
+        let padding: CGFloat = 5
 
         NSLayoutConstraint.activate([
-            selectedImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            selectedImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            selectedImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            selectedImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            selectedImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            selectedImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             selectedImage.heightAnchor.constraint(equalToConstant: view.frame.height/2),
 
-            container.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: 5),
-            container.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor, constant: 5),
-            container.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -5),
-            container.heightAnchor.constraint(equalToConstant: 60),
+            detailsContainer.topAnchor.constraint(equalTo: selectedImage.bottomAnchor, constant: padding),
+            detailsContainer.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor, constant: padding),
+            detailsContainer.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -padding),
+            detailsContainer.heightAnchor.constraint(equalToConstant: 60),
+
+            labelsCollectionViewContainer.topAnchor.constraint(equalTo: detailsContainer.bottomAnchor, constant: padding+5),
+            labelsCollectionViewContainer.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor, constant: padding),
+            labelsCollectionViewContainer.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -padding),
+            labelsCollectionViewContainer.bottomAnchor.constraint(equalTo: viewOnSafariLabel.topAnchor),
 
             viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 25),
             viewOnSafariLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2),

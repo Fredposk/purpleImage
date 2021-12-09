@@ -17,6 +17,7 @@
 		405703C827394ABC0095BD5E /* SearchPicturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703C727394ABC0095BD5E /* SearchPicturesVC.swift */; };
 		405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703C927394AD00095BD5E /* FavoritesVC.swift */; };
 		405703D02739B8C50095BD5E /* PiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405703CF2739B8C50095BD5E /* PiTextField.swift */; };
+		406854E12762A7A200131310 /* LabelsResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406854E02762A7A200131310 /* LabelsResultVC.swift */; };
 		40895A74273A70C500276AE2 /* PiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A73273A70C500276AE2 /* PiButton.swift */; };
 		40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A75273A82D000276AE2 /* SearchResultsVC.swift */; };
 		40895A79273B0DDF00276AE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40895A78273B0DDF00276AE2 /* NetworkManager.swift */; };
@@ -43,6 +44,7 @@
 		405703C727394ABC0095BD5E /* SearchPicturesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPicturesVC.swift; sourceTree = "<group>"; };
 		405703C927394AD00095BD5E /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		405703CF2739B8C50095BD5E /* PiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiTextField.swift; sourceTree = "<group>"; };
+		406854E02762A7A200131310 /* LabelsResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsResultVC.swift; sourceTree = "<group>"; };
 		40895A73273A70C500276AE2 /* PiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiButton.swift; sourceTree = "<group>"; };
 		40895A75273A82D000276AE2 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 		40895A78273B0DDF00276AE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				402DFAE9275FED97000B25F0 /* DetailsVC.swift */,
+				406854E02762A7A200131310 /* LabelsResultVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			files = (
 				40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */,
 				408B024227614F9C002F37B0 /* Constants.swift in Sources */,
+				406854E12762A7A200131310 /* LabelsResultVC.swift in Sources */,
 				403E345C274AE2F300850FF4 /* TagsCollectionViewCell.swift in Sources */,
 				40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */,
 				40895A76273A82D000276AE2 /* SearchResultsVC.swift in Sources */,
