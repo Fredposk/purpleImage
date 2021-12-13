@@ -120,7 +120,6 @@ class SearchResultsVC: UIViewController {
         var snapShot = NSDiffableDataSourceSnapshot<section, Hit>()
         snapShot.appendSections([.main])
         snapShot.appendItems(hits)
-
         DispatchQueue.main.async {
             self.resultsCollectionDiffableData.apply(snapShot)
         }

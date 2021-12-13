@@ -7,11 +7,20 @@
 
 import UIKit
 
+
+
 class LabelsResultVC: UIViewController {
 
-    lazy var labelsCollectionView = UIImageView(frame: .zero)
+    var labelsCollectionView: UICollectionView!
     var labels: [String]!
     var relatedImages: [Hit] = []
+
+    var labelCollectionViewDiffable: UICollectionViewDiffableDataSource<Section, Hit>!
+
+    enum Section {
+        case Main
+    }
+
 
 
     init(labels: [String]) {
@@ -28,16 +37,16 @@ class LabelsResultVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-
-
-            downloadRelatedImages()
-
+        downloadRelatedImages()
+        configureDataSource()
     }
 
     private func configureCollectionView() {
+        labelsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.labelsResultCollectionViewFlowLayout())
         labelsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        labelsCollectionView.backgroundColor = .systemPurple
         view.addSubview(labelsCollectionView)
+
+        labelsCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)
 
         NSLayoutConstraint.activate([
             labelsCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -48,24 +57,42 @@ class LabelsResultVC: UIViewController {
     }
 
     private func downloadRelatedImages() {
-        showLoadingView()
-//        for label in labels {
-
-            NetworkManager.shared.getPictures(for: labels[0], 1) { [weak self] response in
+//        showLoadingView()
+        for label in labels {
+            NetworkManager.shared.getPictures(for: label, 1) { [weak self] response in
                 guard let self = self else { return }
-                self.dismissLoadingView()
                 switch response {
                 case .success(let result):
                     self.relatedImages.append(contentsOf: result.hits)
+                    self.updateData()
+//                    self.dismissLoadingView()
                 case .failure(let error):
                     print(error)
                 }
             }
-//        }
-//        print(relatedImages)
+        }
+
+    }
+
+    private func configureDataSource() {
+        labelCollectionViewDiffable = UICollectionViewDiffableDataSource(collectionView: labelsCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath) as? ResultsCollectionViewCell
+            cell?.setResult(for: itemIdentifier)
+            return cell
+        })
+    }
+
+    private func updateData() {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Hit>()
+        snapShot.appendSections([.Main])
+        relatedImages.shuffle()
+        snapShot.appendItems(relatedImages)
+        labelCollectionViewDiffable.apply(snapShot)
     }
     
 
 
 
 }
+
+

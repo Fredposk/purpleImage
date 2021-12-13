@@ -23,6 +23,9 @@ class DetailsVC: UIViewController {
     let userContainer = UIView(frame: .zero)
     let userLinkImage = UIImageView(image: Images.viewUserChevron)
 
+    let bottomSeparator = UIView(frame: .zero)
+    let topSeparator = UIView(frame: .zero)
+
     init(totalViews: Int, userName: String, userImageUrl: String) {
         super.init(nibName: nil, bundle: nil)
         totalViewsLabel.text = "Views: \(totalViews)"
@@ -48,6 +51,12 @@ class DetailsVC: UIViewController {
 
         view.addSubview(totalViewsLabel)
         view.addSubview(userContainer)
+        bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
+        bottomSeparator.backgroundColor = .quaternaryLabel
+        topSeparator.translatesAutoresizingMaskIntoConstraints = false
+        topSeparator.backgroundColor = .quaternaryLabel
+        view.addSubview(bottomSeparator)
+        view.addSubview(topSeparator)
     }
 
     private func configureUserContainer() {
@@ -57,12 +66,16 @@ class DetailsVC: UIViewController {
         userContainer.addSubview(userNameLabel)
         userContainer.addSubview(userLinkImage)
         userLinkImage.tintColor = .label
-        userLinkImage.isUserInteractionEnabled = true
+        userContainer.isUserInteractionEnabled = true
         userImage.layer.borderWidth = 2
         userImage.layer.backgroundColor = UIColor.quaternaryLabel.cgColor
         userImage.layer.cornerRadius = 10
 
         NSLayoutConstraint.activate([
+            topSeparator.heightAnchor.constraint(equalToConstant: 1),
+            topSeparator.bottomAnchor.constraint(equalTo: userImage.topAnchor),
+            topSeparator.widthAnchor.constraint(equalTo: view.widthAnchor),
+
             userImage.leadingAnchor.constraint(equalTo: userContainer.leadingAnchor),
             userImage.topAnchor.constraint(equalTo: userContainer.topAnchor),
             userImage.widthAnchor.constraint(equalToConstant: 45),
@@ -74,6 +87,9 @@ class DetailsVC: UIViewController {
             userLinkImage.centerYAnchor.constraint(equalTo: userContainer.centerYAnchor),
             userLinkImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
+            bottomSeparator.heightAnchor.constraint(equalToConstant: 1),
+            bottomSeparator.topAnchor.constraint(equalTo: userImage.bottomAnchor),
+            bottomSeparator.widthAnchor.constraint(equalTo: view.widthAnchor)
 
         ])
     }
@@ -96,7 +112,7 @@ class DetailsVC: UIViewController {
 
     private func addClickFunctionToUser() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapChevron))
-        userLinkImage.addGestureRecognizer(tap)
+        userContainer.addGestureRecognizer(tap)
     }
 
     @objc func didTapChevron() {
