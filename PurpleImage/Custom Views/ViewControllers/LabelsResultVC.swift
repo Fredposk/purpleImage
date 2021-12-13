@@ -36,11 +36,21 @@ class LabelsResultVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
         configureCollectionView()
         downloadRelatedImages()
         configureDataSource()
     }
 
+    private func configureView() {
+
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+            view.backgroundColor = .white.withAlphaComponent(0.25)
+        } else {
+            view.backgroundColor = .black.withAlphaComponent(0.25)
+        }
+    }
+    
     private func configureCollectionView() {
         labelsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.labelsResultCollectionViewFlowLayout())
         labelsCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +67,7 @@ class LabelsResultVC: UIViewController {
     }
 
     private func downloadRelatedImages() {
-//        showLoadingView()
+
         for label in labels {
             NetworkManager.shared.getPictures(for: label, 1) { [weak self] response in
                 guard let self = self else { return }
@@ -65,7 +75,6 @@ class LabelsResultVC: UIViewController {
                 case .success(let result):
                     self.relatedImages.append(contentsOf: result.hits)
                     self.updateData()
-//                    self.dismissLoadingView()
                 case .failure(let error):
                     print(error)
                 }
@@ -85,12 +94,10 @@ class LabelsResultVC: UIViewController {
     private func updateData() {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Hit>()
         snapShot.appendSections([.Main])
-        relatedImages.shuffle()
-        snapShot.appendItems(relatedImages)
+        let set = Set(relatedImages)
+        snapShot.appendItems(Array(set))
         labelCollectionViewDiffable.apply(snapShot)
     }
-    
-
 
 
 }

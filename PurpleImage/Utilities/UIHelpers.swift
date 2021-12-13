@@ -57,7 +57,7 @@ enum UIHelper {
 
 //        section
         let section = NSCollectionLayoutSection(group: nestedGroup)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

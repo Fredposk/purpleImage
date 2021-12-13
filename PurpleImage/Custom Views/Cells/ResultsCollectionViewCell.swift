@@ -25,6 +25,7 @@ class ResultsCollectionViewCell: UICollectionViewCell {
     }
 
      func setResult(for hit: Hit) {
+         searchResultImage.image = nil
         NetworkManager.shared.downloadImage(from: hit.webformatURL) { [weak self] result in
             guard let self = self else { return }
             switch result {

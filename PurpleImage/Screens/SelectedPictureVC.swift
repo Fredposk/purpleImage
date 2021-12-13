@@ -27,15 +27,15 @@ class SelectedPictureVC: UIViewController {
     let detailsContainer = UIView(frame: .zero)
     let labelsCollectionViewContainer = UIView(frame: .zero)
 
-    private let viewOnSafariLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemPurple
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "View on Pixabay"
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+//    private let viewOnSafariLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = .systemPurple
+//        label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "View on Pixabay"
+//        label.isUserInteractionEnabled = true
+//        return label
+//    }()
 
 
 
@@ -62,23 +62,23 @@ class SelectedPictureVC: UIViewController {
        add(labelsResultVC, to: labelsCollectionViewContainer)
 
 
-//       MARK: safari webview
-       view.addSubview(viewOnSafariLabel)
-       viewOnSafariLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
+////       MARK: safari webview
+//       view.addSubview(viewOnSafariLabel)
+//       viewOnSafariLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
 
     }
 
 
 
-//    -TODO: This function is being extended
-    @objc func didClickSafariLink() {
-        guard let url = URL(string: pageURL) else {
-            return
-        }
-        let safariVC = SFSafariViewController(url: url)
-        safariVC.preferredControlTintColor = .systemPurple
-        present(safariVC, animated: true)
-    }
+////    -TODO: This function is being extended
+//    @objc func didClickSafariLink() {
+//        guard let url = URL(string: pageURL) else {
+//            return
+//        }
+//        let safariVC = SFSafariViewController(url: url)
+//        safariVC.preferredControlTintColor = .systemPurple
+//        present(safariVC, animated: true)
+//    }
 
     private func configureNavigationBar() {
 
@@ -158,12 +158,12 @@ class SelectedPictureVC: UIViewController {
             labelsCollectionViewContainer.topAnchor.constraint(equalTo: detailsContainer.bottomAnchor, constant: padding+5),
             labelsCollectionViewContainer.leadingAnchor.constraint(equalTo: selectedImage.leadingAnchor, constant: padding),
             labelsCollectionViewContainer.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -padding),
-            labelsCollectionViewContainer.bottomAnchor.constraint(equalTo: viewOnSafariLabel.topAnchor),
+            labelsCollectionViewContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
 
-            viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 25),
-            viewOnSafariLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2),
-            viewOnSafariLabel.widthAnchor.constraint(equalToConstant: 120),
-            viewOnSafariLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//            viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 25),
+//            viewOnSafariLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2),
+//            viewOnSafariLabel.widthAnchor.constraint(equalToConstant: 120),
+//            viewOnSafariLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }

@@ -67,7 +67,8 @@ class SearchResultsVC: UIViewController {
                 }
                 if self.hits.count < response.totalHits { self.hasMorePictures = true}
                 if self.hits.count == response.totalHits {self.hasMorePictures = false}
-                self.hits.append(contentsOf: response.hits)
+                let set = Set(response.hits)
+                self.hits.append(contentsOf: Array(set))
                 self.updateData()
 
             case .failure(let errorMessage):
@@ -120,9 +121,7 @@ class SearchResultsVC: UIViewController {
         var snapShot = NSDiffableDataSourceSnapshot<section, Hit>()
         snapShot.appendSections([.main])
         snapShot.appendItems(hits)
-        DispatchQueue.main.async {
-            self.resultsCollectionDiffableData.apply(snapShot)
-        }
+        resultsCollectionDiffableData.apply(snapShot)
     }
 }
 

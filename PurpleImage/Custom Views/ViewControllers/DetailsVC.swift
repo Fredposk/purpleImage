@@ -48,7 +48,6 @@ class DetailsVC: UIViewController {
     }
 
     private func configureView() {
-
         view.addSubview(totalViewsLabel)
         view.addSubview(userContainer)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +104,6 @@ class DetailsVC: UIViewController {
             userContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             userContainer.heightAnchor.constraint(equalToConstant: 45),
             userContainer.topAnchor.constraint(equalTo: totalViewsLabel.bottomAnchor, constant: 2)
-
 
         ])
     }
