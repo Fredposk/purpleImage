@@ -11,6 +11,11 @@
         <attribute name="userImageUrl" optional="YES" attributeType="String"/>
         <attribute name="views" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="webFormatUrl" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
         <element name="PurpleImage" positionX="-54" positionY="-9" width="128" height="179"/>

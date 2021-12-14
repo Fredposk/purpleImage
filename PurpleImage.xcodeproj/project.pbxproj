@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4022BFD927690994001CB43D /* CoreDataMain.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4022BFD727690994001CB43D /* CoreDataMain.xcdatamodeld */; };
+		4022BFDB27691304001CB43D /* PiEmptyFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022BFDA27691304001CB43D /* PiEmptyFavouritesView.swift */; };
+		4022C00027693975001CB43D /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022BFFF27693975001CB43D /* PersistenceManager.swift */; };
 		402DFAEA275FED97000B25F0 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402DFAE9275FED97000B25F0 /* DetailsVC.swift */; };
 		403E345A27495B5800850FF4 /* SelectedPictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345927495B5800850FF4 /* SelectedPictureVC.swift */; };
 		403E345C274AE2F300850FF4 /* TagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403E345B274AE2F300850FF4 /* TagsCollectionViewCell.swift */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		4022BFD827690994001CB43D /* CoreDataMain.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataMain.xcdatamodel; sourceTree = "<group>"; };
+		4022BFDA27691304001CB43D /* PiEmptyFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiEmptyFavouritesView.swift; sourceTree = "<group>"; };
+		4022BFFF27693975001CB43D /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		402DFAE9275FED97000B25F0 /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		403E345927495B5800850FF4 /* SelectedPictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPictureVC.swift; sourceTree = "<group>"; };
 		403E345B274AE2F300850FF4 /* TagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				40895A73273A70C500276AE2 /* PiButton.swift */,
 				40D8D1672743DFA200FAD588 /* PiResultImageView.swift */,
 				408B023F27611FE3002F37B0 /* PiBodyLabel.swift */,
+				4022BFDA27691304001CB43D /* PiEmptyFavouritesView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				40895A78273B0DDF00276AE2 /* NetworkManager.swift */,
+				4022BFFF27693975001CB43D /* PersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -269,7 +275,9 @@
 				409EC4AD275E6DBB00C2ABC9 /* UIHelpers.swift in Sources */,
 				405703CA27394AD00095BD5E /* FavoritesVC.swift in Sources */,
 				4022BFD927690994001CB43D /* CoreDataMain.xcdatamodeld in Sources */,
+				4022BFDB27691304001CB43D /* PiEmptyFavouritesView.swift in Sources */,
 				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
+				4022C00027693975001CB43D /* PersistenceManager.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
 				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 class SearchPicturesVC: UIViewController {
 
     private let logoImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "purple"))
+        let image = UIImageView(image: Images.logoImage)
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

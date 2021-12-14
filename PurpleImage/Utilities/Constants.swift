@@ -16,9 +16,11 @@ enum Images {
     static let placeHolderUser = "person.circle.fill"
     static let viewUserChevron = UIImage(systemName: "chevron.right")
     static let search = UIImage(systemName: "magnifyingglass")
+    static let logoImage = UIImage(named: "purple")
 }
 
 enum Fonts {
     static let viewsLabel = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 14, weight: .medium))
     static let userNameLabel = UIFont.preferredFont(forTextStyle: .subheadline)
+    static let emptyLabel = UIFont.preferredFont(forTextStyle: .body)
 }
