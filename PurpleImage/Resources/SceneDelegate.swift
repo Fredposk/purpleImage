@@ -25,13 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private let createSearchViewController: UINavigationController = {
         let searchVC = SearchPicturesVC()
-        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+        searchVC.tabBarItem = UITabBarItem(title: "Search", image: Images.search, tag: 0)
         return UINavigationController(rootViewController: searchVC)
     }()
 
    private let createFavoritesViewController: UINavigationController = {
         let searchVC = FavoritesVC()
-        searchVC.tabBarItem = UITabBarItem(title: "Liked", image: UIImage(systemName: "heart"), tag: 1)
+       searchVC.tabBarItem = UITabBarItem(title: "Liked", image: Images.notHeartedImage, tag: 1)
         return UINavigationController(rootViewController: searchVC)
     }()
 

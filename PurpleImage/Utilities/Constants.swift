@@ -11,10 +11,11 @@ import UIKit
 enum Images {
     static let shareButtonImage = "square.and.arrow.up"
     static let safariButtonImage = "safari"
-    static let heartedImage = "heart.fill"
-    static let notHeartedImage = "heart"
+    static let heartedImage = UIImage(systemName: "heart.fill")
+    static let notHeartedImage = UIImage(systemName: "heart")
     static let placeHolderUser = "person.circle.fill"
     static let viewUserChevron = UIImage(systemName: "chevron.right")
+    static let search = UIImage(systemName: "magnifyingglass")
 }
 
 enum Fonts {

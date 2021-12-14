@@ -58,7 +58,7 @@ class SelectedPictureVC: UIViewController {
        detailsVC.delegate = self
        add(detailsVC, to: detailsContainer)
 
-       let labelsResultVC = LabelsResultVC(labels: tags)
+       let labelsResultVC = LabelsResultVC(labels: tags, mainImageID: id)
        add(labelsResultVC, to: labelsCollectionViewContainer)
 
 
@@ -85,11 +85,11 @@ class SelectedPictureVC: UIViewController {
          navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
          navigationController?.navigationBar.tintColor = .systemPurple
-        let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapDoneButton))
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapShareButton))
 
 
 //        run database check to save picture
-        let likeButton = UIBarButtonItem(image: UIImage(systemName: pictureSaved ? Images.heartedImage : Images.notHeartedImage ), style: .done, target: self, action: #selector(changeSavedStatus))
+        let likeButton = UIBarButtonItem(image: pictureSaved ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
         navigationItem.rightBarButtonItems = [shareButton, likeButton]
 
     }
@@ -99,7 +99,7 @@ class SelectedPictureVC: UIViewController {
         configureNavigationBar()
     }
 
-    @objc func didTapDoneButton() {
+    @objc func didTapShareButton() {
 //        Change this to share image
         dismiss(animated: true)
     }
