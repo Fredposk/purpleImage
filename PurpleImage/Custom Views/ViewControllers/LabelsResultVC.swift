@@ -88,7 +88,7 @@ class LabelsResultVC: UIViewController {
     private func configureDataSource() {
         labelCollectionViewDiffable = UICollectionViewDiffableDataSource(collectionView: labelsCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath) as? ResultsCollectionViewCell
-            cell?.setResult(for: itemIdentifier)
+            cell?.setResultWithWebImage(for: itemIdentifier)
             return cell
         })
     }

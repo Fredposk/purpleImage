@@ -26,7 +26,7 @@ class PiEmptyFavouritesView: UIView {
     private func configure() {
         addSubview(logoImage)
         addSubview(label)
-        label.text = "Start liking some pictures to show them here!"
+        label.text = "Start liking some pictures!"
         logoImage.translatesAutoresizingMaskIntoConstraints = false
 
         backgroundColor = .systemBackground

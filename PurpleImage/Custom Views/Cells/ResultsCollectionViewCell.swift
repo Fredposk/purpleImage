@@ -24,7 +24,9 @@ class ResultsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-     func setResult(for hit: Hit) {
+
+
+     func setResultWithWebImage(for hit: Hit) {
          searchResultImage.image = nil
         NetworkManager.shared.downloadImage(from: hit.webformatURL) { [weak self] result in
             guard let self = self else { return }
@@ -36,6 +38,11 @@ class ResultsCollectionViewCell: UICollectionViewCell {
                 break
             }
         }
+    }
+
+    func setResultWithCoreDataImage(for image: PurpleImage) {
+        searchResultImage.image = nil
+        searchResultImage.image = UIImage(data: image.pictureData!)
     }
 
     private func configure() {
