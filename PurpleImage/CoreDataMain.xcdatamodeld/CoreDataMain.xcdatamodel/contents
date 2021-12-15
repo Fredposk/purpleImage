@@ -6,7 +6,7 @@
         <attribute name="pictureData" optional="YES" attributeType="Binary"/>
         <attribute name="tagsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="user" optional="YES" attributeType="String"/>
-        <attribute name="userId" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="userImage" optional="YES" attributeType="Binary"/>
         <attribute name="userImageUrl" optional="YES" attributeType="String"/>
         <attribute name="views" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

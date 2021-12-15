@@ -152,7 +152,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.views = chosenItem.views
         destinationVC.userImageURL = chosenItem.userImageURL
         destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(chosenItem.user)-\(chosenItem.userId)/")!
-        
+        destinationVC.hit = chosenItem
 
         navigationController?.pushViewController(destinationVC, animated: true)
 

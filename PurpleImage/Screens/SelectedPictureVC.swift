@@ -10,6 +10,8 @@ import SafariServices
 
 class SelectedPictureVC: UIViewController {
 
+    var hit: Hit!
+
     var url: String!
     var views: Int!
     var user: String!
@@ -80,6 +82,8 @@ class SelectedPictureVC: UIViewController {
 //        present(safariVC, animated: true)
 //    }
 
+
+
     private func configureNavigationBar() {
 
          navigationController?.isNavigationBarHidden = false
@@ -89,13 +93,13 @@ class SelectedPictureVC: UIViewController {
 
 
 //        run database check to save picture
-        let likeButton = UIBarButtonItem(image: pictureSaved ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
+        let likeButton = UIBarButtonItem(image: Persistence.shared.isLiked(hit) ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
         navigationItem.rightBarButtonItems = [shareButton, likeButton]
 
     }
 
     @objc func changeSavedStatus() {
-        pictureSaved.toggle()
+        Persistence.shared.toggleLike(hit, imageData: selectedImage.image!, userImageData: Images.heartedImage!)
         configureNavigationBar()
     }
 
