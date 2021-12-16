@@ -11,33 +11,13 @@ import SafariServices
 class SelectedPictureVC: UIViewController {
 
     var hit: Hit!
-
-    var url: String!
-    var views: Int!
-    var user: String!
-    var tags: [String]!
-    var pageURL: String!
-    var largeImageURL: String!
-    var id: Int!
-    var userImageURL: String!
     var userProfileUrl: URL!
 
-    var pictureSaved = false
 
     let selectedImage = PiResultImageView(frame: .zero)
 
     let detailsContainer = UIView(frame: .zero)
     let labelsCollectionViewContainer = UIView(frame: .zero)
-
-//    private let viewOnSafariLabel: UILabel = {
-//        let label = UILabel()
-//        label.textColor = .systemPurple
-//        label.font = UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: .current)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "View on Pixabay"
-//        label.isUserInteractionEnabled = true
-//        return label
-//    }()
 
 
 
@@ -56,11 +36,11 @@ class SelectedPictureVC: UIViewController {
        view.backgroundColor = .systemBackground
        view.addSubview(selectedImage)
 
-       let detailsVC = DetailsVC(totalViews: views, userName: user, userImageUrl: userImageURL)
+       let detailsVC = DetailsVC(totalViews: hit.views, userName: hit.user, userImageUrl: hit.userImageURL)
        detailsVC.delegate = self
        add(detailsVC, to: detailsContainer)
 
-       let labelsResultVC = LabelsResultVC(labels: tags, mainImageID: id)
+       let labelsResultVC = LabelsResultVC(labels: hit.tagsArray, mainImageID: hit.id)
        add(labelsResultVC, to: labelsCollectionViewContainer)
 
 
@@ -92,7 +72,7 @@ class SelectedPictureVC: UIViewController {
         let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapShareButton))
 
 
-//        run database check to save picture
+
         let likeButton = UIBarButtonItem(image: Persistence.shared.isLiked(hit) ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
         navigationItem.rightBarButtonItems = [shareButton, likeButton]
 
@@ -117,7 +97,7 @@ class SelectedPictureVC: UIViewController {
 
     private func downloadImage() {
         showLoadingView()
-        NetworkManager.shared.downloadImage(from: url) { [weak self ] result in
+        NetworkManager.shared.downloadImage(from: hit.largeImageURL) { [weak self ] result in
 
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -177,6 +157,10 @@ extension SelectedPictureVC: UserDetail {
     
     func didTapUserLink() {
         presentSafariVC(with: userProfileUrl)
+    }
+
+    func didTapPixabayLink() {
+        presentSafariVC(with: URL(string: hit.pageURL) ?? Links.pixabayMain)
     }
 
     func presentSafariVC(with url: URL) {

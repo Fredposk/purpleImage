@@ -60,4 +60,29 @@ enum UIHelper {
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         return UICollectionViewCompositionalLayout(section: section)
     }
+
+    static func likedImagesRectangleCompositionalLayout() -> UICollectionViewCompositionalLayout {
+//        items
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 7.5, bottom: 5, trailing: 7.5)
+//        groups
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/3)), subitems: [item])
+//        section
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+
+    }
+
+    static func likedImagesGridCompositionalLayout() -> UICollectionViewCompositionalLayout {
+//        items
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.50), heightDimension: .fractionalHeight(1.0)))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+//        groups
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/3)), subitem: item, count: 2)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 7.5, bottom: 5, trailing: 7.5)
+//        section
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+
+    }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol UserDetail: AnyObject {
     func didTapUserLink()
+    func didTapPixabayLink()
 }
 
 class DetailsVC: UIViewController {
@@ -26,13 +27,22 @@ class DetailsVC: UIViewController {
     let bottomSeparator = UIView(frame: .zero)
     let topSeparator = UIView(frame: .zero)
 
+    private let viewOnSafariLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemPurple.withAlphaComponent(0.7)
+        label.font = Fonts.viewsLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "View on Pixabay"
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+
     init(totalViews: Int, userName: String, userImageUrl: String) {
         super.init(nibName: nil, bundle: nil)
         totalViewsLabel.text = "Views: \(totalViews)"
         userNameLabel.text = "By: \(userName)"
         self.userImageUrl = userImageUrl
     }
-
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,11 +55,13 @@ class DetailsVC: UIViewController {
         configureLayout()
         fetchUserImage()
         addClickFunctionToUser()
+        addClickFunctionToSafariLink()
     }
 
     private func configureView() {
         view.addSubview(totalViewsLabel)
         view.addSubview(userContainer)
+        view.addSubview(viewOnSafariLabel)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         bottomSeparator.backgroundColor = .quaternaryLabel
         topSeparator.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +108,11 @@ class DetailsVC: UIViewController {
     private func configureLayout() {
         NSLayoutConstraint.activate([
 
-            totalViewsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 2),
+            viewOnSafariLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 1),
+            viewOnSafariLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 16),
+
+            totalViewsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 1),
             totalViewsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             totalViewsLabel.heightAnchor.constraint(equalToConstant: 16),
 
@@ -113,9 +129,20 @@ class DetailsVC: UIViewController {
         userContainer.addGestureRecognizer(tap)
     }
 
+    private func addClickFunctionToSafariLink() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSafariLink))
+        viewOnSafariLabel.addGestureRecognizer(tap)
+    }
+
     @objc func didTapChevron() {
         delegate?.didTapUserLink()
     }
+
+    @objc func didTapSafariLink() {
+        delegate?.didTapPixabayLink()
+    }
+
+    
 
     private func fetchUserImage() {
         NetworkManager.shared.downloadImage(from: userImageUrl) { [weak self] result in

@@ -13,29 +13,39 @@ enum Section {
     case main
 }
 
-class FavoritesVC: UIViewController {
+class FavoritesVC: UIViewController, UICollectionViewDelegate {
+
 
     private var favourites = [PurpleImage]()
     
     var placeholderView = PiEmptyFavouritesView()
 
-     var favouritesCollectionView: UICollectionView!
+    var favouritesCollectionView: UICollectionView!
 
     var favouritesCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<Section, PurpleImage>?
+
+    let segmentedControlItems = [Images.rectangleGrid1, Images.rectangleGrid2, Images.list]
+
+    var segmentedControl: UISegmentedControl!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         getFavourites()
-        favoritesCount()
+        configureSegmentedControl()
+        configureSegmentedControlLayout()
+        didChangeSegmentedControlItem(segmentedControl)
     }
 
 
-    private func getFavourites() {
+     @objc func getFavourites() {
         Persistence.shared.fetchFavorites { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -43,7 +53,7 @@ class FavoritesVC: UIViewController {
                 favourites = images
                 DispatchQueue.main.async {
                     self.favoritesCount()
-                    self.updateData()
+
                 }
             case .failure(let errorMessage):
                 self.favoritesCount()
@@ -56,19 +66,62 @@ class FavoritesVC: UIViewController {
         }
     }
 
-    private func configureCollectionView() {
-        favouritesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.configureSearchResultsLayout())
+    private func configureSegmentedControlLayout() {
+        NSLayoutConstraint.activate([
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+        ])
+    }
+
+    private func configureCollectionView(with compositionalLayout: UICollectionViewCompositionalLayout) {
+        favouritesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
+        favouritesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(favouritesCollectionView)
         favouritesCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)
+        favouritesCollectionView.delegate = self
+
+        NSLayoutConstraint.activate([
+            favouritesCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            favouritesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            favouritesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            favouritesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        configureDataSource()
+
+    }
+
+    private func configureSegmentedControl() {
+        segmentedControl = UISegmentedControl(items: segmentedControlItems as [Any])
+        view.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.backgroundColor = .systemBackground
+        segmentedControl.selectedSegmentTintColor = .systemPurple
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.tintColor = .label
+
+        segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlItem(_:)), for: .valueChanged)
+
+    }
+
+    @objc func didChangeSegmentedControlItem(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
+        case 1:
+            configureCollectionView(with: UIHelper.likedImagesGridCompositionalLayout())
+        case 2:
+            print("2")
+        default:
+            configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
+        }
     }
 
     private func favoritesCount() {
         if favourites.isEmpty {
             view.addSubview(placeholderView)
             placeholderView.frame = view.bounds
-        } else {
-            configureCollectionView()
-            configureDataSource()
         }
     }
 
@@ -78,6 +131,7 @@ class FavoritesVC: UIViewController {
            cell?.setResultWithCoreDataImage(for: itemIdentifier)
            return cell
        })
+       updateData()
     }
 
     private func updateData() {

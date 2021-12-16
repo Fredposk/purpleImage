@@ -144,13 +144,6 @@ extension SearchResultsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationVC = SelectedPictureVC()
         let chosenItem = hits[indexPath.item]
-        destinationVC.url = chosenItem.largeImageURL
-        destinationVC.tags = chosenItem.tagsArray
-        destinationVC.user = chosenItem.user
-        destinationVC.id = chosenItem.id
-        destinationVC.pageURL = chosenItem.pageURL
-        destinationVC.views = chosenItem.views
-        destinationVC.userImageURL = chosenItem.userImageURL
         destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(chosenItem.user)-\(chosenItem.userId)/")!
         destinationVC.hit = chosenItem
 
