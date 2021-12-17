@@ -13,7 +13,7 @@ enum Section {
     case main
 }
 
-class FavoritesVC: UIViewController, UICollectionViewDelegate {
+class FavoritesVC: UIViewController {
 
 
     private var favourites = [PurpleImage]()
@@ -137,9 +137,17 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
 
     private func configureTableView() {
         favouritesTableView = UITableView(frame: view.bounds)
-        favouritesTableView.backgroundColor = .red
         view.addSubview(favouritesTableView)
         favouritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        favouritesTableView.dataSource = self
+        favouritesTableView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            favouritesTableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            favouritesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            favouritesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            favouritesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 
 
@@ -152,15 +160,23 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
     }
 }
 
-extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
+extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        favourites.count
+       return favourites.count
     }
-
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.accessoryType = .disclosureIndicator
+        var content = cell.defaultContentConfiguration()
+        content.text = favourites[indexPath.row].user
+        cell.contentConfiguration = content
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = favourites[indexPath.row]
+//        let hit = Hit(id: item.id, pageURL: item, largeImageURL: item.pictureData, webformatURL: item.webFormatUrl, views: item.views, user: item.user, userId: item.userId, tags: item.tagsArray, userImageURL: item.userImageUrl)
     }
 
 
