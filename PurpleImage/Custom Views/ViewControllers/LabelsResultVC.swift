@@ -7,9 +7,12 @@
 
 import UIKit
 
+protocol RelatedImages: AnyObject {
+    func didTapRelatedImage(_ image: Hit)
+}
 
 
-class LabelsResultVC: UIViewController {
+class LabelsResultVC: UIViewController, UICollectionViewDelegate {
 
     var labelsCollectionView: UICollectionView!
     var labels: [String]!
@@ -18,11 +21,11 @@ class LabelsResultVC: UIViewController {
 
     var labelCollectionViewDiffable: UICollectionViewDiffableDataSource<Section, Hit>!
 
+    weak var delegate: RelatedImages?
+
     enum Section {
         case Main
     }
-
-
 
     init(labels: [String], mainImageID: Int) {
         super.init(nibName: nil, bundle: nil)
@@ -34,30 +37,16 @@ class LabelsResultVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-   
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-        configureCollectionView()
         downloadRelatedImages()
-        configureDataSource()
-    }
-
-    private func configureView() {
-
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-            view.backgroundColor = .white.withAlphaComponent(0.50)
-        } else {
-            view.backgroundColor = .black.withAlphaComponent(0.50)
-        }
     }
     
     private func configureCollectionView() {
         labelsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.labelsResultCollectionViewFlowLayout())
         labelsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(labelsCollectionView)
-
+        labelsCollectionView.delegate = self
         labelsCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)
 
         NSLayoutConstraint.activate([
@@ -70,19 +59,27 @@ class LabelsResultVC: UIViewController {
 
     private func downloadRelatedImages() {
         for label in labels {
-            NetworkManager.shared.getPictures(for: label, 1) { [weak self] response in
+            NetworkManager.shared.getPictures(for: label, Int.random(in: 1..<4)) { [weak self] response in
                 guard let self = self else { return }
                 switch response {
                 case .success(let result):
+                    DispatchQueue.main.async {
+                        self.configureCollectionView()
+                        self.configureDataSource()
+                        self.updateData()
+                    }
                     self.relatedImages.append(contentsOf: result.hits.filter { $0.id != self.mainImageID})
                     let set = Set(self.relatedImages)
                     self.relatedImages = Array(set)
-                    self.updateData()
                 case .failure(let error):
                     print(error)
                 }
             }
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didTapRelatedImage(relatedImages[indexPath.item])
     }
 
     private func configureDataSource() {
@@ -102,5 +99,7 @@ class LabelsResultVC: UIViewController {
 
 
 }
+
+
 
 

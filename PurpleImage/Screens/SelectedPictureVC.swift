@@ -13,13 +13,10 @@ class SelectedPictureVC: UIViewController {
     var hit: Hit!
     var userProfileUrl: URL!
 
-
     let selectedImage = PiResultImageView(frame: .zero)
 
     let detailsContainer = UIView(frame: .zero)
     let labelsCollectionViewContainer = UIView(frame: .zero)
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +27,6 @@ class SelectedPictureVC: UIViewController {
         configureDoubleTapAction()
     }
 
-
-
    private func configureView() {
        view.backgroundColor = .systemBackground
        view.addSubview(selectedImage)
@@ -41,28 +36,9 @@ class SelectedPictureVC: UIViewController {
        add(detailsVC, to: detailsContainer)
 
        let labelsResultVC = LabelsResultVC(labels: hit.tagsArray, mainImageID: hit.id)
+       labelsResultVC.delegate = self
        add(labelsResultVC, to: labelsCollectionViewContainer)
-
-
-////       MARK: safari webview
-//       view.addSubview(viewOnSafariLabel)
-//       viewOnSafariLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickSafariLink)))
-
     }
-
-
-
-////    -TODO: This function is being extended
-//    @objc func didClickSafariLink() {
-//        guard let url = URL(string: pageURL) else {
-//            return
-//        }
-//        let safariVC = SFSafariViewController(url: url)
-//        safariVC.preferredControlTintColor = .systemPurple
-//        present(safariVC, animated: true)
-//    }
-
-
 
     private func configureNavigationBar() {
 
@@ -70,8 +46,6 @@ class SelectedPictureVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
          navigationController?.navigationBar.tintColor = .systemPurple
         let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapShareButton))
-
-
 
         let likeButton = UIBarButtonItem(image: Persistence.shared.isLiked(hit) ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
         navigationItem.rightBarButtonItems = [shareButton, likeButton]
@@ -84,7 +58,6 @@ class SelectedPictureVC: UIViewController {
     }
 
     @objc func didTapShareButton() {
-//        Change this to share image
         dismiss(animated: true)
     }
 
@@ -94,11 +67,9 @@ class SelectedPictureVC: UIViewController {
         selectedImage.addGestureRecognizer(doubleTap)
     }
 
-
     private func downloadImage() {
         showLoadingView()
         NetworkManager.shared.downloadImage(from: hit.largeImageURL) { [weak self ] result in
-
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.dismissLoadingView()
@@ -106,7 +77,6 @@ class SelectedPictureVC: UIViewController {
             switch result {
             case .success(let image):
                 self.selectedImage.image = image
-                
             case .failure(let errorMessage):
                 let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -123,7 +93,6 @@ class SelectedPictureVC: UIViewController {
         childVC.view.frame = container.bounds
         childVC.didMove(toParent: self)
     }
-
 
     private func configureLayouts() {
         let padding: CGFloat = 5
@@ -144,17 +113,19 @@ class SelectedPictureVC: UIViewController {
             labelsCollectionViewContainer.trailingAnchor.constraint(equalTo: selectedImage.trailingAnchor, constant: -padding),
             labelsCollectionViewContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
 
-//            viewOnSafariLabel.heightAnchor.constraint(equalToConstant: 25),
-//            viewOnSafariLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2),
-//            viewOnSafariLabel.widthAnchor.constraint(equalToConstant: 120),
-//            viewOnSafariLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-
         ])
     }
 }
 
-extension SelectedPictureVC: UserDetail {
-    
+extension SelectedPictureVC: UserDetail, RelatedImages {
+    func didTapRelatedImage(_ image: Hit) {
+        let destinationVC = SelectedPictureVC()
+        destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(image.user)-\(image.userId)/")!
+        destinationVC.hit = image
+
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
+
     func didTapUserLink() {
         presentSafariVC(with: userProfileUrl)
     }
@@ -168,8 +139,4 @@ extension SelectedPictureVC: UserDetail {
         safariVC.preferredControlTintColor = .systemPurple
         present(safariVC, animated: true)
     }
-
-
-
-
 }

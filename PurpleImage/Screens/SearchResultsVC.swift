@@ -148,6 +148,5 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destinationVC.hit = chosenItem
 
         navigationController?.pushViewController(destinationVC, animated: true)
-
     }
 }

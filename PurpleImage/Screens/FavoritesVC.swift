@@ -24,6 +24,8 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
 
     var favouritesCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<Section, PurpleImage>?
 
+    var favouritesTableView: UITableView!
+
     let segmentedControlItems = [Images.rectangleGrid1, Images.rectangleGrid2, Images.list]
 
     var segmentedControl: UISegmentedControl!
@@ -53,7 +55,6 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
                 favourites = images
                 DispatchQueue.main.async {
                     self.favoritesCount()
-
                 }
             case .failure(let errorMessage):
                 self.favoritesCount()
@@ -112,7 +113,7 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
         case 1:
             configureCollectionView(with: UIHelper.likedImagesGridCompositionalLayout())
         case 2:
-            print("2")
+            configureTableView()
         default:
             configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
         }
@@ -134,6 +135,14 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
        updateData()
     }
 
+    private func configureTableView() {
+        favouritesTableView = UITableView(frame: view.bounds)
+        favouritesTableView.backgroundColor = .red
+        view.addSubview(favouritesTableView)
+        favouritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+
+
     private func updateData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, PurpleImage>()
         snapshot.appendSections([.main])
@@ -141,4 +150,18 @@ class FavoritesVC: UIViewController, UICollectionViewDelegate {
         favouritesCollectionViewDiffableDataSource?.apply(snapshot)
         
     }
+}
+
+extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        favourites.count
+    }
+
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
+    }
+
+
 }
