@@ -34,16 +34,19 @@ class FavoritesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
+        configureSegmentedControl()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.isHidden = true
         getFavourites()
-        configureSegmentedControl()
         configureSegmentedControlLayout()
         didChangeSegmentedControlItem(segmentedControl)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
     }
 
 
@@ -140,6 +143,7 @@ class FavoritesVC: UIViewController {
         view.addSubview(favouritesTableView)
         favouritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         favouritesTableView.dataSource = self
+        favouritesTableView.delegate = self
         favouritesTableView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -174,9 +178,25 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item: PurpleImage = favourites[indexPath.item]
+        pushToSelectedImageVC(item)
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = favourites[indexPath.row]
-//        let hit = Hit(id: item.id, pageURL: item, largeImageURL: item.pictureData, webformatURL: item.webFormatUrl, views: item.views, user: item.user, userId: item.userId, tags: item.tagsArray, userImageURL: item.userImageUrl)
+        let item: PurpleImage = favourites[indexPath.row]
+        pushToSelectedImageVC(item)
+
+    }
+
+    func pushToSelectedImageVC(_ item: PurpleImage) {
+        let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: "hhelo", userImageURL: item.userImageUrl ?? "")
+        let destinationVC = SelectedPictureVC()
+//        destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(hit.user)-\(hit.userId)/")!
+        destinationVC.hit = hit
+
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 
 

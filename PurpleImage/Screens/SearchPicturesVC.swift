@@ -120,7 +120,6 @@ class SearchPicturesVC: UIViewController {
 
 }
 
-
 extension SearchPicturesVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         didTapActionButton()

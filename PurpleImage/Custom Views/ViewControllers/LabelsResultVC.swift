@@ -73,6 +73,7 @@ class LabelsResultVC: UIViewController, UICollectionViewDelegate {
                     self.relatedImages = Array(set)
                 case .failure(let error):
                     print(error)
+                    #warning("Add View to notify fetching problem")
                 }
             }
         }

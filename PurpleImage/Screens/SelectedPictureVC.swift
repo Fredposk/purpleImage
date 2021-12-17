@@ -11,12 +11,24 @@ import SafariServices
 class SelectedPictureVC: UIViewController {
 
     var hit: Hit!
-    var userProfileUrl: URL!
+
 
     let selectedImage = PiResultImageView(frame: .zero)
 
     let detailsContainer = UIView(frame: .zero)
     let labelsCollectionViewContainer = UIView(frame: .zero)
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,13 +132,13 @@ class SelectedPictureVC: UIViewController {
 extension SelectedPictureVC: UserDetail, RelatedImages {
     func didTapRelatedImage(_ image: Hit) {
         let destinationVC = SelectedPictureVC()
-        destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(image.user)-\(image.userId)/")!
         destinationVC.hit = image
 
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 
     func didTapUserLink() {
+        let userProfileUrl = URL(string: "https://pixabay.com/users/\(hit.user)-\(hit.userId)/")!
         presentSafariVC(with: userProfileUrl)
     }
 

@@ -73,6 +73,7 @@ class Persistence {
             newImage.tagsArray = image.tagsArray
             newImage.pictureData = imageData.jpegData(compressionQuality: 1.0)
             newImage.userImage = userImageData.jpegData(compressionQuality: 1.0)
+            newImage.pageUrl = image.pageURL
         }
         saveContext()
     }

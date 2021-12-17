@@ -30,9 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
 
    private let createFavoritesViewController: UINavigationController = {
-        let searchVC = FavoritesVC()
-       searchVC.tabBarItem = UITabBarItem(title: "Liked", image: Images.notHeartedImage, tag: 1)
-        return UINavigationController(rootViewController: searchVC)
+        let favouritesVC = FavoritesVC()
+       favouritesVC.tabBarItem = UITabBarItem(title: "Liked", image: Images.notHeartedImage, tag: 1)
+        return UINavigationController(rootViewController: favouritesVC)
     }()
 
     func createTabBar() -> UITabBarController {
