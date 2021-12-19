@@ -11,7 +11,6 @@ protocol RelatedImages: AnyObject {
     func didTapRelatedImage(_ image: Hit)
 }
 
-
 class LabelsResultVC: UIViewController, UICollectionViewDelegate {
 
     var labelsCollectionView: UICollectionView!
@@ -73,7 +72,6 @@ class LabelsResultVC: UIViewController, UICollectionViewDelegate {
                     self.relatedImages = Array(set)
                 case .failure(let error):
                     print(error)
-                    #warning("Add View to notify fetching problem")
                 }
             }
         }
@@ -97,8 +95,6 @@ class LabelsResultVC: UIViewController, UICollectionViewDelegate {
         snapShot.appendItems(relatedImages)
         labelCollectionViewDiffable.apply(snapShot)
     }
-
-
 }
 
 

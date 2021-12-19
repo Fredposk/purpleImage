@@ -35,10 +35,14 @@ class SelectedPictureVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadImage()
-        configureNavigationBar()
         configureView()
         configureLayouts()
         configureDoubleTapAction()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureNavigationBar()
     }
 
    private func configureView() {

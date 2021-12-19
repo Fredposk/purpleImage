@@ -30,16 +30,16 @@ class FavoritesVC: UIViewController {
 
     var segmentedControl: UISegmentedControl!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureSegmentedControl()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getFavourites()
+        configureSegmentedControl()
         configureSegmentedControlLayout()
         didChangeSegmentedControlItem(segmentedControl)
     }
@@ -48,7 +48,6 @@ class FavoritesVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-
 
      @objc func getFavourites() {
         Persistence.shared.fetchFavorites { [weak self] result in
@@ -154,13 +153,11 @@ class FavoritesVC: UIViewController {
         ])
     }
 
-
     private func updateData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, PurpleImage>()
         snapshot.appendSections([.main])
         snapshot.appendItems(favourites)
         favouritesCollectionViewDiffableDataSource?.apply(snapshot)
-        
     }
 }
 
@@ -191,12 +188,10 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     }
 
     func pushToSelectedImageVC(_ item: PurpleImage) {
-        #warning("tags array needs to be passed so that if device is online, it shows related images, otherwise it wont show anything at all")
         let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: "", userImageURL: item.userImageUrl ?? "")
         let destinationVC = SelectedPictureVC(with: hit, pictureIsFromMemory: true)
 
         navigationController?.pushViewController(destinationVC, animated: true)
     }
-
 
 }

@@ -70,7 +70,7 @@ class Persistence {
             newImage.views = Int32(image.views)
             newImage.largeImageURL = image.largeImageURL
             newImage.webFormatUrl = image.webformatURL
-            newImage.tagsArray = image.tagsArray
+            newImage.tagsArray = image.tags
             newImage.pictureData = imageData.jpegData(compressionQuality: 1.0)
             newImage.userImage = userImageData.jpegData(compressionQuality: 1.0)
             newImage.pageUrl = image.pageURL
