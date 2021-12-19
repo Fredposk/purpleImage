@@ -142,10 +142,8 @@ extension SearchResultsVC: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destinationVC = SelectedPictureVC()
         let chosenItem = hits[indexPath.item]
-        destinationVC.hit = chosenItem
-
+        let destinationVC = SelectedPictureVC(with: chosenItem, pictureIsFromMemory: false)
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

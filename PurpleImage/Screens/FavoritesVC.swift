@@ -191,10 +191,9 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     }
 
     func pushToSelectedImageVC(_ item: PurpleImage) {
-        let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: "hhelo", userImageURL: item.userImageUrl ?? "")
-        let destinationVC = SelectedPictureVC()
-//        destinationVC.userProfileUrl = URL(string: "https://pixabay.com/users/\(hit.user)-\(hit.userId)/")!
-        destinationVC.hit = hit
+        #warning("tags array needs to be passed so that if device is online, it shows related images, otherwise it wont show anything at all")
+        let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: "", userImageURL: item.userImageUrl ?? "")
+        let destinationVC = SelectedPictureVC(with: hit, pictureIsFromMemory: true)
 
         navigationController?.pushViewController(destinationVC, animated: true)
     }

@@ -78,4 +78,16 @@ class Persistence {
         saveContext()
     }
 
+    func useCoreDataImage(_ Image: Hit, completion: @escaping (Result<UIImage, errorMessage>) -> Void) {
+        let fetchRequest = fetchRequest(for: Image)
+        fetchRequest.fetchLimit = 1
+        let matchingItem = try? context.fetch(fetchRequest)
+
+        guard let item = matchingItem?.first else {
+            completion(.failure(errorMessage.coreDataImageError))
+            return
+        }
+        completion(.success(UIImage(data: item.pictureData!)!))
+        return
+    }
 }

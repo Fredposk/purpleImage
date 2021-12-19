@@ -11,7 +11,7 @@ import SafariServices
 class SelectedPictureVC: UIViewController {
 
     var hit: Hit!
-
+    var pictureIsFromMemory: Bool!
 
     let selectedImage = PiResultImageView(frame: .zero)
 
@@ -26,15 +26,17 @@ class SelectedPictureVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    convenience init() {
+    convenience init(with hit: Hit, pictureIsFromMemory: Bool) {
         self.init(nibName: nil, bundle: nil)
+        self.hit = hit
+        self.pictureIsFromMemory = pictureIsFromMemory
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
         downloadImage()
         configureNavigationBar()
+        configureView()
         configureLayouts()
         configureDoubleTapAction()
     }
@@ -81,6 +83,7 @@ class SelectedPictureVC: UIViewController {
 
     private func downloadImage() {
         showLoadingView()
+        if pictureIsFromMemory == false {
         NetworkManager.shared.downloadImage(from: hit.largeImageURL) { [weak self ] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -90,12 +93,32 @@ class SelectedPictureVC: UIViewController {
             case .success(let image):
                 self.selectedImage.image = image
             case .failure(let errorMessage):
-                let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                }
             }
         }
     }
+        else {
+            Persistence.shared.useCoreDataImage(hit) { [weak self] result in
+                guard let self = self else { return }
+                self.dismissLoadingView()
+                switch result {
+                case .success(let result):
+                    self.selectedImage.image = result
+                    print("success from coredata")
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "ERROR", message: error.rawValue, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }
+}
 
     private func add(_ childVC: UIViewController, to container: UIView) {
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -131,8 +154,7 @@ class SelectedPictureVC: UIViewController {
 
 extension SelectedPictureVC: UserDetail, RelatedImages {
     func didTapRelatedImage(_ image: Hit) {
-        let destinationVC = SelectedPictureVC()
-        destinationVC.hit = image
+        let destinationVC = SelectedPictureVC(with: image, pictureIsFromMemory: false)
 
         navigationController?.pushViewController(destinationVC, animated: true)
     }

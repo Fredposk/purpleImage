@@ -15,6 +15,5 @@ enum errorMessage: String, Error {
     case errorParsingData = "error decoding data"
     case noResults = "No results, try another search!"
     case coreDataError = "Error getting your liked images, try again later"
-
-    
+    case coreDataImageError = "Your fetched image might be corrupted"
 }
