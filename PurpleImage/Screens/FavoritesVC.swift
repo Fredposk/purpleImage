@@ -140,10 +140,11 @@ class FavoritesVC: UIViewController {
     private func configureTableView() {
         favouritesTableView = UITableView(frame: view.bounds)
         view.addSubview(favouritesTableView)
-        favouritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        favouritesTableView.register(FavouritesCell.self, forCellReuseIdentifier: FavouritesCell.ReUseIdentifier)
         favouritesTableView.dataSource = self
         favouritesTableView.delegate = self
         favouritesTableView.translatesAutoresizingMaskIntoConstraints = false
+        favouritesTableView.rowHeight = 80
 
         NSLayoutConstraint.activate([
             favouritesTableView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
@@ -167,11 +168,8 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.accessoryType = .disclosureIndicator
-        var content = cell.defaultContentConfiguration()
-        content.text = favourites[indexPath.row].user
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavouritesCell.ReUseIdentifier, for: indexPath) as! FavouritesCell
+        cell.setData(with: favourites[indexPath.row])
         return cell
     }
 
@@ -184,7 +182,16 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item: PurpleImage = favourites[indexPath.row]
         pushToSelectedImageVC(item)
+    }
 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+
+
+    }
+
+    func removeItemFromFavourite(_ item: PurpleImage) {
+        #warning("make new function to remove item")
     }
 
     func pushToSelectedImageVC(_ item: PurpleImage) {

@@ -19,6 +19,7 @@ class DetailsVC: UIViewController {
     let totalViewsLabel = PiBodyLabel(textAlignment: .center, textColor: .secondaryLabel, font: Fonts.viewsLabel)
     let userNameLabel = PiBodyLabel(textAlignment: .left, textColor: .label, font: Fonts.userNameLabel)
     let userImage = PiResultImageView(frame: .zero)
+    #warning("need to check if its coredata image or fetch from url")
     var userImageUrl: String!
 
     let userContainer = UIView(frame: .zero)

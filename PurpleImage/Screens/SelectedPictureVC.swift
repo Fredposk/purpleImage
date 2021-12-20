@@ -76,7 +76,10 @@ class SelectedPictureVC: UIViewController {
     }
 
     @objc func didTapShareButton() {
-        dismiss(animated: true)
+        let items: [Any] = [selectedImage.image!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+
+        present(ac, animated: true)
     }
 
     private func configureDoubleTapAction() {
@@ -157,6 +160,8 @@ class SelectedPictureVC: UIViewController {
 }
 
 extension SelectedPictureVC: UserDetail, RelatedImages {
+
+
     func didTapRelatedImage(_ image: Hit) {
         let destinationVC = SelectedPictureVC(with: image, pictureIsFromMemory: false)
 
@@ -177,4 +182,6 @@ extension SelectedPictureVC: UserDetail, RelatedImages {
         safariVC.preferredControlTintColor = .systemPurple
         present(safariVC, animated: true)
     }
+
+
 }

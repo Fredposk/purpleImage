@@ -44,6 +44,7 @@ class LabelsResultVC: UIViewController, UICollectionViewDelegate {
     private func configureCollectionView() {
         labelsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.labelsResultCollectionViewFlowLayout())
         labelsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        labelsCollectionView.isScrollEnabled = false
         view.addSubview(labelsCollectionView)
         labelsCollectionView.delegate = self
         labelsCollectionView.register(ResultsCollectionViewCell.self, forCellWithReuseIdentifier: ResultsCollectionViewCell.ReuseID)

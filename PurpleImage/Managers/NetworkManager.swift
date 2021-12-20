@@ -10,7 +10,8 @@ import UIKit
 
 final class NetworkManager {
     static let shared = NetworkManager()
-    private let baseURL = "https://pixabay.com/api/?key=24258005-77fd453beb301eb32e3abf948&q="
+    static let apiKey = "24258005-77fd453beb301eb32e3abf948"
+    private let baseURL = "https://pixabay.com/api/?key=\(apiKey)&q="
     let cache = NSCache<NSString, UIImage>()
 
     private init() {}
@@ -23,12 +24,13 @@ extension NetworkManager {
 
     func getPictures(for searchTerm: String, _ page: Int, completed: @escaping getPicturesResult) {
 
-        let endPoint = baseURL + searchTerm.replacingOccurrences(of: " ", with: "+") + "&page=" + String(page)
+        let endPoint = baseURL + searchTerm.replacingOccurrences(of: " ", with: "+") + "&page=" + String(page) + String("&image_type=photo+illustrations")
         guard let url = URL(string: endPoint) else {
             completed(.failure(.invalidSearchTerm))
             return
         }
         let task = URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+            
             if let _ = error  {
                 completed(.failure(.networkingError))
             }
