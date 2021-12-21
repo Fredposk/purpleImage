@@ -186,12 +186,29 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-
-
+        removeItemFromFavourite(favourites[indexPath.row]) { [weak self] in
+            guard let self = self else { return }
+            self.favourites.remove(at: indexPath.row)
+            self.favouritesTableView.deleteRows(at: [indexPath], with: .left)
+        }
     }
 
-    func removeItemFromFavourite(_ item: PurpleImage) {
-        #warning("make new function to remove item")
+    func removeItemFromFavourite(_ image: PurpleImage, completion: () -> Void) {
+        Persistence.shared.deleteFromPersistence(id: image.id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(let errorMessage):
+                DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
 
     func pushToSelectedImageVC(_ item: PurpleImage) {

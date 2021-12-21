@@ -23,18 +23,12 @@ class FavouritesCell: UITableViewCell {
     }
 
     func setData(with favourite: PurpleImage) {
-        #warning("Currently using url. needs to user coredata image")
         usernameLabel.text = favourite.user
-        NetworkManager.shared.downloadImage(from: favourite.webFormatUrl ?? "") {[weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let result):
-                self.avatarImageView.image = result
-            case .failure(_):
-                self.avatarImageView.image = UIImage(systemName: "camera")
-            }
-
+        guard let imageData = favourite.pictureData else {
+            avatarImageView.image = UIImage(systemName: "camera")
+            return
         }
+        avatarImageView.image = UIImage(data: imageData)
     }
 
     private func configure() {

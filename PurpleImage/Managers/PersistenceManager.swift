@@ -53,6 +53,25 @@ final class Persistence {
         return count > 0
     }
 
+    func deleteFromPersistence(id: PurpleImage.ID, completion: (Result<String, errorMessage>) -> Void) {
+        let fetchRequest: NSFetchRequest<PurpleImage> = PurpleImage.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+        fetchRequest.fetchLimit = 1
+
+        let matchingItem = try? context.fetch(fetchRequest)
+
+        if let foundItem = matchingItem?.first {
+             context.delete(foundItem)
+            saveContext()
+            completion(.success("Success"))
+            return
+        }
+        else {
+            completion(.failure(errorMessage.errorRemovingFavouritedItem))
+            return
+        }
+    }
+
 
     func toggleLike(_ image: Hit, imageData: UIImage, userImageData: UIImage) {
         let fetchRequest = fetchRequest(for: image)
