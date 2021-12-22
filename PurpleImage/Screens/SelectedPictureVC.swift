@@ -18,6 +18,8 @@ class SelectedPictureVC: UIViewController {
     let detailsContainer = UIView(frame: .zero)
     let labelsCollectionViewContainer = UIView(frame: .zero)
 
+    var hasFinishedLoading = false
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
@@ -71,14 +73,15 @@ class SelectedPictureVC: UIViewController {
     }
 
     @objc func changeSavedStatus() {
+        guard hasFinishedLoading else { return }
         Persistence.shared.toggleLike(hit, imageData: selectedImage.image!, userImageData: Images.heartedImage!)
         configureNavigationBar()
     }
 
     @objc func didTapShareButton() {
+        guard hasFinishedLoading else { return }
         let items: [Any] = [selectedImage.image!]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-
         present(ac, animated: true)
     }
 
@@ -95,6 +98,7 @@ class SelectedPictureVC: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.dismissLoadingView()
+                self.hasFinishedLoading = true
             }
             switch result {
             case .success(let image):
@@ -115,7 +119,6 @@ class SelectedPictureVC: UIViewController {
                 switch result {
                 case .success(let result):
                     self.selectedImage.image = result
-                    print("success from coredata")
                 case .failure(let error):
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "ERROR", message: error.rawValue, preferredStyle: .alert)

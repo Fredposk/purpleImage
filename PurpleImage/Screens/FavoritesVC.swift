@@ -93,6 +93,26 @@ class FavoritesVC: UIViewController {
 
         configureDataSource()
 
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        favouritesCollectionView.addGestureRecognizer(gesture)
+    }
+
+    @objc func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+        let actionSheet = UIAlertController(title: nil, message: "Delete From Favourites?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            guard let self = self else { return }
+            guard let targetIndexPath = self.favouritesCollectionView.indexPathForItem(at: sender.location(in: self.favouritesCollectionView)) else {
+                return
+            }
+            #warning("this function is not working to send current item")
+            print(targetIndexPath)
+        }))
+        present(actionSheet, animated: true, completion: nil)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
     }
 
     private func configureSegmentedControl() {
@@ -101,7 +121,7 @@ class FavoritesVC: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.backgroundColor = .systemBackground
         segmentedControl.selectedSegmentTintColor = .systemPurple
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = 1
         segmentedControl.tintColor = .label
 
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlItem(_:)), for: .valueChanged)
@@ -120,6 +140,7 @@ class FavoritesVC: UIViewController {
             configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
         }
     }
+
 
     private func favoritesCount() {
         if favourites.isEmpty {
@@ -163,6 +184,8 @@ class FavoritesVC: UIViewController {
 }
 
 extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate {
+
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return favourites.count
     }
@@ -183,6 +206,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
         let item: PurpleImage = favourites[indexPath.row]
         pushToSelectedImageVC(item)
     }
+
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
@@ -212,7 +236,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     }
 
     func pushToSelectedImageVC(_ item: PurpleImage) {
-        let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: "", userImageURL: item.userImageUrl ?? "")
+        let hit = Hit(id: Int(item.id), pageURL: item.pageUrl ?? "", largeImageURL: item.largeImageURL ?? "", webformatURL: item.webFormatUrl ?? "", views: Int(item.views), user: item.user ?? "", userId: Int(item.userId), tags: item.tagsArray ?? "", userImageURL: item.userImageUrl ?? "")
         let destinationVC = SelectedPictureVC(with: hit, pictureIsFromMemory: true)
 
         navigationController?.pushViewController(destinationVC, animated: true)
