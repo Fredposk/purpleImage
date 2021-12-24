@@ -13,8 +13,6 @@ enum Section {
     case main
 }
 
-#warning("memory leak identified when switching in segmented controller")
-
 class FavoritesVC: UIViewController {
 
 
@@ -43,7 +41,8 @@ class FavoritesVC: UIViewController {
         getFavourites()
         configureSegmentedControl()
         configureSegmentedControlLayout()
-        didChangeSegmentedControlItem(segmentedControl)
+        configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +132,10 @@ class FavoritesVC: UIViewController {
     }
 
     @objc func didChangeSegmentedControlItem(_ segmentedControl: UISegmentedControl) {
+
+        if favouritesCollectionView.superview != nil {favouritesCollectionView.removeFromSuperview()}
+        else if favouritesTableView.superview != nil { favouritesTableView.removeFromSuperview()}
+
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())

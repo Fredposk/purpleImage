@@ -119,6 +119,7 @@ class SelectedPictureVC: UIViewController {
                 switch result {
                 case .success(let result):
                     self.selectedImage.image = result
+                    self.hasFinishedLoading = true
                 case .failure(let error):
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "ERROR", message: error.rawValue, preferredStyle: .alert)
