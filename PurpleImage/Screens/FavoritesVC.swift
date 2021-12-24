@@ -13,6 +13,8 @@ enum Section {
     case main
 }
 
+#warning("memory leak identified when switching in segmented controller")
+
 class FavoritesVC: UIViewController {
 
 
@@ -107,7 +109,9 @@ class FavoritesVC: UIViewController {
             }
             #warning("this function is not working to send current item")
             print(targetIndexPath)
+
         }))
+
         present(actionSheet, animated: true, completion: nil)
     }
 
