@@ -65,7 +65,7 @@ class SelectedPictureVC: UIViewController {
          navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
          navigationController?.navigationBar.tintColor = .systemPurple
-        let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.shareButtonImage) , style: .done,target: self, action: #selector(didTapShareButton))
+        let shareButton = UIBarButtonItem(image: Images.shareButtonImage , style: .done,target: self, action: #selector(didTapShareButton))
 
         let likeButton = UIBarButtonItem(image: Persistence.shared.isLiked(hit) ? Images.heartedImage : Images.notHeartedImage, style: .done, target: self, action: #selector(changeSavedStatus))
         navigationItem.rightBarButtonItems = [shareButton, likeButton]

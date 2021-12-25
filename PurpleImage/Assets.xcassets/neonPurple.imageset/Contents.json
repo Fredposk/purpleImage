@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "neon-sign-photo-camera-symbol-with-text-vector-24796359.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

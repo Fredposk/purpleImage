@@ -9,13 +9,13 @@ import UIKit
 
 
 enum Images {
-    static let shareButtonImage = "square.and.arrow.up"
+    static let shareButtonImage = UIImage(systemName:"square.and.arrow.up")
     static let heartedImage = UIImage(systemName: "heart.fill")
     static let notHeartedImage = UIImage(systemName: "heart")
-    static let placeHolderUser = "person.circle.fill"
+    static let placeHolderUser = UIImage(systemName: "person.circle.fill")
     static let viewUserChevron = UIImage(systemName: "chevron.right")
     static let search = UIImage(systemName: "magnifyingglass")
-    static let logoImage = UIImage(named: "purple")
+    static let logoImage = UIImage(named: "neonPurple")
     static let rectangleGrid1 = UIImage(systemName: "rectangle.grid.1x2.fill")
     static let rectangleGrid2 = UIImage(systemName: "square.grid.2x2.fill")
     static let list = UIImage(systemName: "list.dash")

@@ -153,7 +153,7 @@ class DetailsVC: UIViewController {
                 case .success(let result):
                     self.userImage.image = result
                 case .failure(_):
-                    self.userImage.image = UIImage(systemName: Images.placeHolderUser)
+                    self.userImage.image = Images.placeHolderUser
                 }
             }
 

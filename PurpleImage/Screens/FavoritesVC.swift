@@ -41,7 +41,7 @@ class FavoritesVC: UIViewController {
         getFavourites()
         configureSegmentedControl()
         configureSegmentedControlLayout()
-        configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
+        configureCollectionView(with: UIHelper.likedImagesGridCompositionalLayout())
         
     }
 
