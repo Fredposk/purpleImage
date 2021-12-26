@@ -15,7 +15,7 @@ enum Images {
     static let placeHolderUser = UIImage(systemName: "person.circle.fill")
     static let viewUserChevron = UIImage(systemName: "chevron.right")
     static let search = UIImage(systemName: "magnifyingglass")
-    static let logoImage = UIImage(named: "neonPurple")
+    static let logoImage = UIImage(named: "purple")
     static let rectangleGrid1 = UIImage(systemName: "rectangle.grid.1x2.fill")
     static let rectangleGrid2 = UIImage(systemName: "square.grid.2x2.fill")
     static let list = UIImage(systemName: "list.dash")

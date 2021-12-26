@@ -12,8 +12,6 @@ class SearchPicturesVC: UIViewController {
     private let logoImage: UIImageView = {
         let image = UIImageView(image: Images.logoImage)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 25
-        image.clipsToBounds = true
         return image
     }()
 
@@ -54,8 +52,8 @@ class SearchPicturesVC: UIViewController {
         NSLayoutConstraint.activate([
             logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImage.widthAnchor.constraint(equalToConstant: 150),
-            logoImage.heightAnchor.constraint(equalToConstant: 150)
+            logoImage.widthAnchor.constraint(equalToConstant: 290),
+            logoImage.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 

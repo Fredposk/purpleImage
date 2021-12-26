@@ -99,18 +99,19 @@ class FavoritesVC: UIViewController {
     }
 
     @objc func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
-        let actionSheet = UIAlertController(title: nil, message: "Delete From Favourites?", preferredStyle: .actionSheet)
+        guard let targetIndexPath = self.favouritesCollectionView.indexPathForItem(at: sender.location(in: self.favouritesCollectionView)) else {
+            return
+        }
+        let actionSheet = UIAlertController(title: nil, message: "Delete From Favourites?", preferredStyle: .alert)
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
             guard let self = self else { return }
-            guard let targetIndexPath = self.favouritesCollectionView.indexPathForItem(at: sender.location(in: self.favouritesCollectionView)) else {
-                return
+            self.removeItemFromFavourite(self.favourites[targetIndexPath.row]) {
+                self.favourites.remove(at: targetIndexPath.row)
+                self.updateData()
             }
-            #warning("this function is not working to send current item")
-            print(targetIndexPath)
 
         }))
-
         present(actionSheet, animated: true, completion: nil)
     }
 
@@ -250,3 +251,5 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate, UICollectionV
     }
 
 }
+
+
