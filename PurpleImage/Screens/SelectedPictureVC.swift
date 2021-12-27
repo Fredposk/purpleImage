@@ -103,11 +103,12 @@ class SelectedPictureVC: UIViewController {
             case .success(let image):
                 self.selectedImage.image = image
             case .failure(let errorMessage):
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     let alert = UIAlertController(title: "ERROR", message: errorMessage.rawValue, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                }
+//                    self.present(alert, animated: true)
+                    self.showFromMain(alert)
+//                }
             }
         }
     }
@@ -120,11 +121,12 @@ class SelectedPictureVC: UIViewController {
                     self.selectedImage.image = result
                     self.hasFinishedLoading = true
                 case .failure(let error):
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         let alert = UIAlertController(title: "ERROR", message: error.rawValue, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                        self.present(alert, animated: true)
-                    }
+//                        self.present(alert, animated: true)
+                        self.showFromMain(alert)
+//                    }
                 }
             }
         }

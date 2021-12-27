@@ -45,4 +45,10 @@ extension UIViewController {
             }
         }
     }
+
+    func showFromMain(_ alert: UIAlertController) {
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

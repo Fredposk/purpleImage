@@ -25,8 +25,6 @@ struct Hit: Identifiable, Codable, Hashable {
 
     var tagsArray: [String]  {
        return tags.replacingOccurrences(of: ",", with: "").description.components(separatedBy: " ")
-
-
     }
 }
 

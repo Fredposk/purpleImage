@@ -60,6 +60,7 @@ extension NetworkManager {
         let cacheKey = NSString(string: urlString)
         if let image = cache.object(forKey: cacheKey) {
             completed(.success(image))
+            return
         }
 
        guard let url = URL(string: urlString) else {
@@ -89,6 +90,7 @@ extension NetworkManager {
            DispatchQueue.main.async {
                self.cache.setObject(image, forKey: cacheKey)
                completed(.success(image))
+               return
            }
        }
        task.resume()

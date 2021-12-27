@@ -61,11 +61,12 @@ class FavoritesVC: UIViewController {
                 }
             case .failure(let errorMessage):
                 self.favoritesCount()
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Error", message: errorMessage.rawValue, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                }
+//                    self.present(alert, animated: true, completion: nil)
+                    self.showFromMain(alert)
+//                }
             }
         }
     }
@@ -102,7 +103,7 @@ class FavoritesVC: UIViewController {
         guard let targetIndexPath = self.favouritesCollectionView.indexPathForItem(at: sender.location(in: self.favouritesCollectionView)) else {
             return
         }
-        let actionSheet = UIAlertController(title: nil, message: "Delete From Favourites?", preferredStyle: .alert)
+        let actionSheet = UIAlertController(title: nil, message: "Delete From Favourites?", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
             guard let self = self else { return }
@@ -127,7 +128,6 @@ class FavoritesVC: UIViewController {
         segmentedControl.selectedSegmentTintColor = .systemPurple
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.tintColor = .label
-
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlItem(_:)), for: .valueChanged)
 
     }

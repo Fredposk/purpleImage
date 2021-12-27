@@ -72,7 +72,6 @@ final class Persistence {
         }
     }
 
-
     func toggleLike(_ image: Hit, imageData: UIImage, userImageData: UIImage) {
         let fetchRequest = fetchRequest(for: image)
         fetchRequest.fetchLimit = 1
@@ -90,8 +89,10 @@ final class Persistence {
             newImage.largeImageURL = image.largeImageURL
             newImage.webFormatUrl = image.webformatURL
             newImage.tagsArray = image.tags
-            newImage.pictureData = imageData.jpegData(compressionQuality: 1.0)
-            newImage.userImage = userImageData.jpegData(compressionQuality: 1.0)
+            DispatchQueue.global().async {
+                newImage.pictureData = imageData.jpegData(compressionQuality: 1.0)
+                newImage.userImage = userImageData.jpegData(compressionQuality: 1.0)
+            }
             newImage.pageUrl = image.pageURL
         }
         saveContext()

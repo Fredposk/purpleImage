@@ -143,8 +143,6 @@ class DetailsVC: UIViewController {
         delegate?.didTapPixabayLink()
     }
 
-    
-
     private func fetchUserImage() {
         NetworkManager.shared.downloadImage(from: userImageUrl) { [weak self] result in
             guard let self = self else { return }

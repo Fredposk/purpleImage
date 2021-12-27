@@ -5,13 +5,5 @@
       <ContextState
          contextName = "mach_msg_trap:(null)">
       </ContextState>
-      <ContextState
-         contextName = "GLOBAL">
-         <PersistentStrings>
-            <PersistentString
-               value = "(UIAlertController *)0x7f8d6a81a800">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
    </ContextStates>
 </VariablesViewState>
