@@ -109,8 +109,8 @@ class SearchResultsVC: UIViewController {
     }
 
     func configureDataSource() {
-        resultsCollectionDiffableData = UICollectionViewDiffableDataSource<section, Hit>(collectionView: resultsCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = self.resultsCollectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath)
+        resultsCollectionDiffableData = UICollectionViewDiffableDataSource<section, Hit>(collectionView: resultsCollectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
+            let cell = self?.resultsCollectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath)
             as? ResultsCollectionViewCell
             cell?.setResultWithWebImage(for: itemIdentifier)
             return cell

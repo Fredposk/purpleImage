@@ -107,7 +107,11 @@ final class Persistence {
             completion(.failure(errorMessage.coreDataImageError))
             return
         }
-        completion(.success(UIImage(data: item.pictureData!)!))
-        return
+        if let cdImage = item.pictureData {
+            completion(.success(UIImage(data: cdImage)!))
+            return
+        } else {
+            completion(.failure(errorMessage.coreDataImageError))
+        }
     }
 }

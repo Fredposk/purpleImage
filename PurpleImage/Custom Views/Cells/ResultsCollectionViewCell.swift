@@ -42,7 +42,11 @@ class ResultsCollectionViewCell: UICollectionViewCell {
 
     func setResultWithCoreDataImage(for image: PurpleImage) {
         searchResultImage.image = nil
-        searchResultImage.image = UIImage(data: image.pictureData!)
+        if let cdImage = image.pictureData {
+            searchResultImage.image = UIImage(data: cdImage)
+        } else {
+            searchResultImage.image = Images.search
+        }
         searchResultImage.layer.cornerRadius = self.frame.height/6
     }
 

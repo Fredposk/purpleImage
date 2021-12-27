@@ -32,6 +32,7 @@
 		40A22964273DD4BE002DF56D /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */; };
 		40D8D1682743DFA200FAD588 /* PiResultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D1672743DFA200FAD588 /* PiResultImageView.swift */; };
 		40D8D16D2743E78400FAD588 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */; };
+		40DB233D277A3A2900A3EED4 /* PiTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DB233C277A3A2900A3EED4 /* PiTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		40A22963273DD4BE002DF56D /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
 		40D8D1672743DFA200FAD588 /* PiResultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiResultImageView.swift; sourceTree = "<group>"; };
 		40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		40DB233C277A3A2900A3EED4 /* PiTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		405703D12739C1A20095BD5E /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				40DB233B277A39F600A3EED4 /* TabBarControllers */,
 				402DFAEB275FEDE2000B25F0 /* ViewControllers */,
 				40A22962273DD498002DF56D /* Cells */,
 				405703CF2739B8C50095BD5E /* PiTextField.swift */,
@@ -194,6 +197,14 @@
 				40D8D16C2743E78400FAD588 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		40DB233B277A39F600A3EED4 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				40DB233C277A3A2900A3EED4 /* PiTabBarController.swift */,
+			);
+			path = TabBarControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 				4022BFDB27691304001CB43D /* PiEmptyFavouritesView.swift in Sources */,
 				40895A7E273B136800276AE2 /* ErrorMessage.swift in Sources */,
 				4022C00027693975001CB43D /* PersistenceManager.swift in Sources */,
+				40DB233D277A3A2900A3EED4 /* PiTabBarController.swift in Sources */,
 				405703D02739B8C50095BD5E /* PiTextField.swift in Sources */,
 				40895A7C273B10A000276AE2 /* PictureResultsModel.swift in Sources */,
 				405703B42739477C0095BD5E /* AppDelegate.swift in Sources */,

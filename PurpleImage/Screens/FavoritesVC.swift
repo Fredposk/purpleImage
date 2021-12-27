@@ -18,6 +18,7 @@ class FavoritesVC: UIViewController {
 
     private var favourites = [PurpleImage]()
     
+
     var placeholderView = PiEmptyFavouritesView()
 
     var favouritesCollectionView: UICollectionView!
@@ -50,12 +51,13 @@ class FavoritesVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
 
-     @objc func getFavourites() {
+    #warning("come back to here.. retain cycle possibly in this function")
+      func getFavourites() {
         Persistence.shared.fetchFavorites { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let images):
-                favourites = images
+                self.favourites = images
                 DispatchQueue.main.async {
                     self.favoritesCount()
                 }
@@ -158,8 +160,8 @@ class FavoritesVC: UIViewController {
     }
 
    private func configureDataSource() {
-       favouritesCollectionViewDiffableDataSource = UICollectionViewDiffableDataSource<Section, PurpleImage>(collectionView: favouritesCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-           let cell = self.favouritesCollectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath) as? ResultsCollectionViewCell
+       favouritesCollectionViewDiffableDataSource = UICollectionViewDiffableDataSource<Section, PurpleImage>(collectionView: favouritesCollectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
+           let cell = self?.favouritesCollectionView.dequeueReusableCell(withReuseIdentifier: ResultsCollectionViewCell.ReuseID, for: indexPath) as? ResultsCollectionViewCell
            cell?.setResultWithCoreDataImage(for: itemIdentifier)
            return cell
        })
