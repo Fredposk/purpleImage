@@ -17,7 +17,7 @@ class FavoritesVC: UIViewController {
 
 
     private var favourites = [PurpleImage]()
-    
+    var totalInCD = 0
 
     var placeholderView = PiEmptyFavouritesView()
 
@@ -51,8 +51,11 @@ class FavoritesVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
 
-    #warning("come back to here.. retain cycle possibly in this function")
-      func getFavourites() {
+
+      private func getFavourites() {
+
+
+
         Persistence.shared.fetchFavorites { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -63,12 +66,9 @@ class FavoritesVC: UIViewController {
                 }
             case .failure(let errorMessage):
                 self.favoritesCount()
-//                DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Error", message: errorMessage.rawValue, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//                    self.present(alert, animated: true, completion: nil)
                     self.showFromMain(alert)
-//                }
             }
         }
     }
