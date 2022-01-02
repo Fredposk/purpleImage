@@ -81,19 +81,19 @@ final class Persistence {
             context.delete(firstItem)
         } else {
             let newImage = PurpleImage(context: self.context)
-            newImage.id = Int32(image.id)
-            newImage.user = image.user
-            newImage.userId = Int32(image.userId)
-            newImage.userImageUrl = image.userImageURL
-            newImage.views = Int32(image.views)
-            newImage.largeImageURL = image.largeImageURL
-            newImage.webFormatUrl = image.webformatURL
-            newImage.tagsArray = image.tags
             DispatchQueue.global().async {
+                newImage.id = Int32(image.id)
+                newImage.user = image.user
+                newImage.userId = Int32(image.userId)
+                newImage.userImageUrl = image.userImageURL
+                newImage.views = Int32(image.views)
+                newImage.largeImageURL = image.largeImageURL
+                newImage.webFormatUrl = image.webformatURL
+                newImage.tagsArray = image.tags
                 newImage.pictureData = imageData.jpegData(compressionQuality: 1.0)
                 newImage.userImage = userImageData.jpegData(compressionQuality: 1.0)
+                newImage.pageUrl = image.pageURL
             }
-            newImage.pageUrl = image.pageURL
         }
         saveContext()
     }

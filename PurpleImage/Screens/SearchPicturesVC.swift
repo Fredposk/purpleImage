@@ -25,6 +25,13 @@ class SearchPicturesVC: UIViewController {
         return label
     }()
 
+    private let contentView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+
     private let textfield = PiTextField()
     private let callToActionButton = PiButton(buttonTitle: "Search..")
 
@@ -33,8 +40,7 @@ class SearchPicturesVC: UIViewController {
         view.backgroundColor = .systemBackground
 
         configureLogoImageView()
-        configureTextField()
-        configureCallToActionButton()
+        configureTextFieldWithButtonView()
         removeKeyboard()
         callToActionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
         configurePrivacyPolicyLabel()
@@ -57,32 +63,33 @@ class SearchPicturesVC: UIViewController {
         ])
     }
 
-    func configureTextField() {
-        view.addSubview(textfield)
-
-        NSLayoutConstraint.activate([
-            textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textfield.widthAnchor.constraint(equalToConstant: 290),
-            textfield.heightAnchor.constraint(equalToConstant: 45),
-            textfield.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40)
-        ])
-
-        textfield.delegate = self
-    }
-
     func removeKeyboard() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(textfield.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
 
-    func configureCallToActionButton() {
+    func configureTextFieldWithButtonView() {
+
+        view.addSubview(contentView)
         view.addSubview(callToActionButton)
+        view.addSubview(textfield)
+        textfield.delegate = self
 
         NSLayoutConstraint.activate([
-            callToActionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 80),
+            contentView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            contentView.heightAnchor.constraint(equalToConstant: view.frame.height/6),
+
+            textfield.widthAnchor.constraint(equalToConstant: 290),
+            textfield.heightAnchor.constraint(equalToConstant: 45),
+            textfield.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            textfield.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+
+            callToActionButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             callToActionButton.heightAnchor.constraint(equalToConstant: 40),
             callToActionButton.widthAnchor.constraint(equalToConstant: 200),
-            callToActionButton.topAnchor.constraint(equalTo: textfield.bottomAnchor, constant: 60)
+            callToActionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
 
