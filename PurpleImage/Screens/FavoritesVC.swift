@@ -17,7 +17,9 @@ class FavoritesVC: UIViewController {
 
 
     private var favourites = [PurpleImage]()
-    var totalInCD = 0
+
+    var savedSegmentedControlChoice = UserDefaults.standard.integer(forKey: "choice")
+    let defaults = UserDefaults.standard
 
     var placeholderView = PiEmptyFavouritesView()
 
@@ -42,7 +44,6 @@ class FavoritesVC: UIViewController {
         getFavourites()
         configureSegmentedControl()
         configureSegmentedControlLayout()
-        configureCollectionView(with: UIHelper.likedImagesGridCompositionalLayout())
         
     }
 
@@ -53,9 +54,6 @@ class FavoritesVC: UIViewController {
 
 
       private func getFavourites() {
-
-
-
         Persistence.shared.fetchFavorites { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -128,17 +126,14 @@ class FavoritesVC: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.backgroundColor = .systemBackground
         segmentedControl.selectedSegmentTintColor = .systemPurple
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = savedSegmentedControlChoice
         segmentedControl.tintColor = .label
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlItem(_:)), for: .valueChanged)
-
+        didChangeSegmentedControlItem(segmentedControl)
     }
 
     @objc func didChangeSegmentedControlItem(_ segmentedControl: UISegmentedControl) {
-
-        if favouritesCollectionView.superview != nil {favouritesCollectionView.removeFromSuperview()}
-        else if favouritesTableView.superview != nil { favouritesTableView.removeFromSuperview()}
-
+        updateDefault(with: segmentedControl.selectedSegmentIndex)
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
@@ -149,6 +144,14 @@ class FavoritesVC: UIViewController {
         default:
             configureCollectionView(with: UIHelper.likedImagesRectangleCompositionalLayout())
         }
+
+//        if favouritesCollectionView.superview != nil {favouritesCollectionView.removeFromSuperview()}
+//        else if favouritesTableView.superview != nil { favouritesTableView.removeFromSuperview()}
+    }
+
+    private func updateDefault(with choice: Int) {
+        defaults.set(choice, forKey: "choice")
+        savedSegmentedControlChoice = choice
     }
 
 
