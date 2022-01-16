@@ -132,6 +132,8 @@ class FavoritesVC: UIViewController {
         didChangeSegmentedControlItem(segmentedControl)
     }
 
+
+
     @objc func didChangeSegmentedControlItem(_ segmentedControl: UISegmentedControl) {
         updateDefault(with: segmentedControl.selectedSegmentIndex)
         switch segmentedControl.selectedSegmentIndex {
@@ -153,7 +155,6 @@ class FavoritesVC: UIViewController {
         defaults.set(choice, forKey: "choice")
         savedSegmentedControlChoice = choice
     }
-
 
     private func favoritesCount() {
         if favourites.isEmpty {
