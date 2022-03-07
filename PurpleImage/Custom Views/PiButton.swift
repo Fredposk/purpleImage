@@ -29,11 +29,11 @@ class PiButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
 
         layer.cornerRadius = 10
-        layer.borderColor = UIColor.systemPurple.cgColor
+        layer.borderColor = CGColor(red: 52/255, green: 27/255, blue: 85/255, alpha: 1.0)
         layer.borderWidth = 1
         setTitleColor(.systemBackground, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        layer.backgroundColor = UIColor.systemPurple.cgColor
+        layer.backgroundColor = CGColor(red: 52/255, green: 27/255, blue: 85/255, alpha: 1.0)
 
 
 
