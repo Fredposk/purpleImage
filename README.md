@@ -6,6 +6,8 @@ To use:
 -
 Clone the GitHub project, build and run in Xcode. The API is completely free, if for some reason the API key is no longer working replace it in the network manager with a new one from [here](https://pixabay.com/api/docs/). 
 
+The App was built using Xcode 12 and Swift 5.5 - Works on Xcode 13 and iOS 14+ 
+
 ## Features:
  - Built using UIKit
  - Programatic UI - No StoryBoards
