@@ -19,6 +19,8 @@ The App was built using Xcode 12 and Swift 5.5 - Works on Xcode 13 and iOS 14+
 			- Diffable Data Sources
 - Safari Webservices
 
-
-
 [See it in action](https://vimeo.com/manage/videos/660256167)
+
+| ![Purple](https://imgur.com/Azef7ln.jpeg) | ![Purple](https://imgur.com/SGBs383.jpeg) |
+|--|--|
+| ![purple](https://imgur.com/Uxlkasq.jpeg) | ![Purple](https://imgur.com/s0Voccq.jpeg) |
